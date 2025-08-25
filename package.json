@@ -1,0 +1,26 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000B\u0000a\u0000t\u0000t\u0000l\u0000e\u0000s\u0000h\u0000i\u0000p\u0000\r\u0000 \u0000",
+  "main": "battleship.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hubfrt1337/Battleship.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hubfrt1337/Battleship/issues"
+  },
+  "homepage": "https://github.com/hubfrt1337/Battleship#readme",
+  "devDependencies": {
+    "@babel/core": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
+    "babel-jest": "^30.0.5",
+    "jest": "^30.0.5"
+  }
+}
