@@ -50,6 +50,7 @@ function findSpots([y,x], ship, direction){
     } else {
     let outOfBoard = checkIfOutOfBoard(verticalArray)
     if(outOfBoard) return false
+    console.log(outOfBoard)
     console.log("tu2")
      return horizontalArray;
     }
@@ -68,20 +69,18 @@ function findNeighbours(array){
         arrayOfFields.push([el[0], el[1] + 1])
     })
     arrayOfFields = Array.from(new Set(arrayOfFields.map(JSON.stringify)),JSON.parse);
-    const filteredArray = arrayOfFields.filter(arrEl => {
-        if(arrEl[0] > 10 || arrEl[0] < 0) return false;
-        if(arrEl[1] > 10 || arrEl[1] < 0) return false;
-        return true;
-    })
-    return filteredArray
+    const filteredArray = arrayOfFields.filter(arrEl => arrEl[0] < 10 && arrEl[0] >= 0 && arrEl[1] < 10 && arrEl[1] >= 0) 
+    console.log(filteredArray, "filteredArray")
+    return filteredArray;
 }
 
+// Check if neighbours if fields
 function checkFields(array, board){
     return array.every(coords => {
         if(board.matrix[coords[0]][coords[1]] === 0){
             return true
         }
-        console.log(coords);
+        console.log(coords, "zajęte koordy");
         return false;
     })
 }
@@ -89,9 +88,10 @@ function checkFields(array, board){
 function checkIfOutOfBoard(array){
     return array.some(arrEl => arrEl[0] > 10 || arrEl[0] < 0 || arrEl[1] > 10 || arrEl[1] < 0);
 }
-const arr = findSpots([4,10], "destroyer", "vertical") 
-console.log(arr)
+const arr = findSpots([4,9], "destroyer", "horizontal") 
+console.log(arr, "Fields of ship to be placed")
 const nei = findNeighbours(arr);
+console.log(nei, "neighbours")
 console.log(checkFields(nei, gameBoard1), "checkfield funkcja")
 
 
