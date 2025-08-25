@@ -18,6 +18,6 @@ describe("Ship factory tests", () => {
         const destroyer = factoryShip(2);
         destroyer.hit()
         destroyer.hit()
-        expect(destroyer.isSunk()).toBeTruthly();
+        expect(destroyer.isSunk()).toBeTruthy();
     })
 });
