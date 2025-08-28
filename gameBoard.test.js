@@ -1,5 +1,5 @@
 import { factoryShip } from "./battleship";
-import { gameBoard, gameBoard } from "./gameBoard";
+import { gameBoard } from "./gameBoard";
 describe("tests for gameBoard factory", () => {
     const destroyer = factoryShip(2)
     const submarine = factoryShip(3)
@@ -14,8 +14,8 @@ describe("tests for gameBoard factory", () => {
         gameBoard.placeShip(submarine, [0,5])
         expect(gameBoard.placeShip(submarine, [0,8])).toBeFalsy();
     })
-    test("Change spot value to 0 if missed a shot", () =>{
-        expect(gameBoard.receiveAttack([5,5])).toBe(0)
+    test("Change spot value to -2 if missed a shot", () =>{
+        expect(gameBoard.receiveAttack([5,5])).toBe(-2)
     })
     test("Change spot value to -1 if hitted a ship", () => {
         expect(gameBoard.receiveAttack([0,0])).toBe(-1);
