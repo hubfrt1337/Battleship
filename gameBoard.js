@@ -17,7 +17,22 @@ export function gameBoard(){
         else return false; // some infomartion to user
         //neighbours = deleteShipFieldsFromNeighbours(spots, neighbours)
     }
-    return {matrix, placeShip};
+    function receiveAttack([y,x]){
+        const coords = matrix[y][x];
+        // if field is empty
+        if(coords === 0){
+            return matrix[y][x] = -2;
+        }
+        //if field was hitted before
+        if(coords === -2 || coords === -1){
+            return "Hit again"
+        }
+        // if field is occupied by a ship
+        if(coords === 1){
+            return matrix[y][x] = -1;
+        }
+    }
+    return {matrix, placeShip, receiveAttack};
 }
 
 // I am not using this function actually.
