@@ -1,6 +1,7 @@
 // It identifies the neigbours fields of a ship
 // The returned array also includes own ship's fields
 export function findNeighbours(array){
+    if(!Array.isArray(array)) return false;
     let arrayOfFields = []
     array.forEach(el => {
         arrayOfFields.push([el[0] + 1, el[1] - 1])

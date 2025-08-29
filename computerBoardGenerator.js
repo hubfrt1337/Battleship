@@ -10,14 +10,12 @@ export function computerBoardGenerator(board){
         while(!placed){
             placed = board.placeShip(randomCoords(), carrier, randomDirection())
         }
-        carrier.launching = true;
     }
     if(!battleship.launching){
         let placed = false;
         while(!placed){
             placed = board.placeShip(randomCoords(), battleship, randomDirection())
         }
-        battleship.launching = true;
     }
     if(!cruiser.launching){
         let placed = false;

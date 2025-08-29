@@ -4,6 +4,7 @@ import { findNeighbours } from "./neighboursFields.js";
 import { checkFields } from "./checkFields.js";
 export function gameBoard(){
     const matrix = Array.from({ length: 10}, () => Array(10).fill(0));
+    let ships = 0;
 
     function placeShip([y,x], ship, direction){
         const spots = findSpots([y,x], ship, direction);
@@ -11,8 +12,12 @@ export function gameBoard(){
         const result = checkFields(neighbours,matrix);
         if(result){
             spots.forEach(([y,x]) => {
-                matrix[y][x] = 1
+                matrix[y][x] = [1, ship]
+                ship.launching = true;
             })
+            ships++;
+            console.log(ships)
+            return true;
         }
         else return false; // some infomartion to user
         //neighbours = deleteShipFieldsFromNeighbours(spots, neighbours)
@@ -24,15 +29,22 @@ export function gameBoard(){
             return matrix[y][x] = -2;
         }
         //if field was hitted before
-        if(coords === -2 || coords === -1){
+        if(coords === -2 || coords[0] === -1){
             return "Hit again"
         }
         // if field is occupied by a ship
-        if(coords === 1){
-            return matrix[y][x] = -1;
+        if(coords[0] === 1){
+            matrix[y][x][1].hit();
+            if(matrix[y][x][1].isSunk()){
+                ships--;
+            }
+            return matrix[y][x][0] = -1;
         }
     }
-    return {matrix, placeShip, receiveAttack};
+    function areAllSunk(){
+        if(!ships) return true;
+    }
+    return {matrix, placeShip, receiveAttack, areAllSunk, get ships(){return ships}};
 }
 
 // I am not using this function actually.

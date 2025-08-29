@@ -8,7 +8,9 @@ export function factoryShip(length){
         }    
     }
     function isSunk() {
-        return hitted === length;
+        if(hitted === length){
+            return sunk = true;
+        }
     }
     return {length,hitted,sunk, hit, isSunk, launching}
 }
