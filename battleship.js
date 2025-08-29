@@ -1,4 +1,5 @@
 export function factoryShip(length){
+    let launching = false;
     let hitted = 0;
     let sunk = false;
     function hit() {
@@ -9,5 +10,5 @@ export function factoryShip(length){
     function isSunk() {
         return hitted === length;
     }
-    return {length,hitted,sunk, hit, isSunk}
+    return {length,hitted,sunk, hit, isSunk, launching}
 }

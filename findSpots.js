@@ -11,13 +11,10 @@ export function findSpots([y,x], ship, direction){
     if(direction === "vertical") {
         let outOfBoard = checkIfOutOfBoard(verticalArray)
         if(outOfBoard) return false
-        console.log("tu")
         return verticalArray;
     } else {
         let outOfBoard = checkIfOutOfBoard(horizontalArray)
         if(outOfBoard) return false
-        console.log(outOfBoard)
-        console.log("tu2")
         return horizontalArray;
     }
 }
