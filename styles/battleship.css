@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main{
+    height: 100vh;
+    background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+    background-color: #522d0e;
+    background-repeat: repeat;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+header{
+    align-items: center;
+    font-size: 3rem;
+    word-spacing: 3px;
+}
+.ships{
+    display: flex;
+    justify-content: center;
+    
+}
+.ships>div{
+    padding: 1rem;
+}
+.sea{
+    width: 80vw;
+    height: 80vh;
+    background-image: url(../images/sea.jpg);
+    border: black solid 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.player-board,
+.pc-board{
+    margin: 2rem;
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    align-items: center;
+    justify-items: center;
+}
