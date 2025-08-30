@@ -16,7 +16,6 @@ export function gameBoard(){
                 ship.launching = true;
             })
             ships++;
-            console.log(ships)
             return true;
         }
         else return false; // some infomartion to user

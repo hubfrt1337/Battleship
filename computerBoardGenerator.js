@@ -38,8 +38,6 @@ export function computerBoardGenerator(board){
         }
         destroyer.launching = true;
     }
-
-    console.log(board.matrix)
 }
 
 
