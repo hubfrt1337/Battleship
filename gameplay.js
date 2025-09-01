@@ -3,6 +3,7 @@ import { gameBoard } from "./gameBoard.js";
 import { computerBoardGenerator } from "./computerBoardGenerator.js";
 import { player } from "./player.js";
 import { showPcDivs, showPlayerDivs } from "./DOMboards.js";
+import { updateBoards } from "./actions.js";
 
 
 const carrier = factoryShip(5)
@@ -32,6 +33,10 @@ fields.forEach(field => {
 //console.log(Array.from(fields));
 console.log(fields[0])
 pcFields.forEach(field => {
-  field.addEventListener("click", (e) => { console.log(e.target) })
+  field.addEventListener("click", (e) => { 
+    const coords = JSON.parse(e.target.dataset.value);
+    playerPc.board.receiveAttack(coords);
+    e.target.innerText = updateBoards(playerPc.board.matrix, coords);
+  })
 }) 
-  console.log(pcFields[2])
+  

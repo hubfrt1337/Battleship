@@ -5,7 +5,7 @@ const pcBoard = document.querySelector(".js-pc-board");
     const boardDiv = document.createElement("div");
 
     boardDiv.className = name;
-    boardDiv.innerText = "X";
+    boardDiv.innerText = "0";
 
     return boardDiv;
   }
@@ -13,16 +13,18 @@ const pcBoard = document.querySelector(".js-pc-board");
  export function showPlayerDivs(board) {
     for (let i = 0; i < board.length ; i++) {
       for(let j = 0; j < board[i].length; j++){
-        console.log(board[i][j], typeof board[i])
-            playerBoard.appendChild(createDiv("field"));
+            const boardDiv = createDiv("field");
+            boardDiv.dataset.value = `[${i},${j}]`;
+            playerBoard.appendChild(boardDiv);
       }
     }
   }
   export function showPcDivs(board) {
     for (let i = 0; i < board.length ; i++) {
       for(let j = 0; j < board[i].length; j++){
-        console.log(board[i][j], typeof board[i])
-            pcBoard.appendChild(createDiv("pc-field"));
+            const boardDiv = createDiv("pc-field");
+            boardDiv.dataset.value = `[${i},${j}]`;
+            pcBoard.appendChild(boardDiv);
       }
     }
   }
