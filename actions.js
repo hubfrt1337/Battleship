@@ -1,4 +1,5 @@
 // It updates the board based on the coordinates given and returns if it was a hit or a miss;
+import { state } from "./gameplay.js";
 export function updateBoards(matrix, coords){
     let number = matrix[coords[0]][coords[1]];
         if(Array.isArray(number)){
@@ -24,7 +25,7 @@ export function switchTurn(currentTurn, result){
 }
 // It makes a random move for the computer and updates the board accordingly
 export function computerMove(board){
-    
+
     const coords = getRandomMove();
     board.receiveAttack(coords);
     // result is x or · depends by if it was hitted or missed
@@ -44,6 +45,7 @@ export function computerMove(board){
     }
     // if computer missed switch turn to player
     if(switchTurn("pcTurn", result) === "playerTurn"){
+        state.canClick = true;
         return;
     } 
 }

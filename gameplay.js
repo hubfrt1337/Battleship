@@ -30,14 +30,21 @@ const pcFields = document.querySelectorAll(".pc-field");
 fields.forEach(field => {
   field.addEventListener("click", (e) => { console.log(e.target) })
 })  
-console.log(fields[0])
 // Add event listener to pc fields so player can interact with them
+// canClick flag to prevent multiple clicks while it is pc turn
+export const state = {
+  canClick: true,
+};
+
 pcFields.forEach(field => {
   field.addEventListener("click", (e) => { 
+    if(!state.canClick) return;
     const coords = JSON.parse(e.target.dataset.value);
     if(!playerPc.board.receiveAttack(coords)){
+      console.log("You already clicked this field");
         return;
     } 
+
     const result = updateBoards(playerPc.board.matrix, coords);
     // result is either "x" or "·"
     e.target.innerText = result;
@@ -48,6 +55,7 @@ pcFields.forEach(field => {
     }
     // if result is · switch to pc turn and make a move after 1 second
     if(switchTurn("playerTurn", result) === "pcTurn"){
+      state.canClick = false;
       console.log("PC's turn");
       setTimeout(() => {
         computerMove(player1.board);
