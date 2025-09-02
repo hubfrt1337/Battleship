@@ -3,7 +3,7 @@ import { gameBoard } from "./gameBoard.js";
 import { computerBoardGenerator } from "./computerBoardGenerator.js";
 import { player } from "./player.js";
 import { showPcDivs, showPlayerDivs } from "./DOMboards.js";
-import { updateBoards } from "./actions.js";
+import { updateBoards, switchTurn, computerMove } from "./actions.js";
 
 
 const carrier = factoryShip(5)
@@ -30,13 +30,29 @@ const pcFields = document.querySelectorAll(".pc-field");
 fields.forEach(field => {
   field.addEventListener("click", (e) => { console.log(e.target) })
 })  
-//console.log(Array.from(fields));
 console.log(fields[0])
+// Add event listener to pc fields so player can interact with them
 pcFields.forEach(field => {
   field.addEventListener("click", (e) => { 
     const coords = JSON.parse(e.target.dataset.value);
-    playerPc.board.receiveAttack(coords);
-    e.target.innerText = updateBoards(playerPc.board.matrix, coords);
-  })
-}) 
+    if(!playerPc.board.receiveAttack(coords)){
+        return;
+    } 
+    const result = updateBoards(playerPc.board.matrix, coords);
+    // result is either "x" or "·"
+    e.target.innerText = result;
+    // if result is x keep the turn to the player
+    if(switchTurn("playerTurn", result) === "playerTurn"){
+      console.log("Player's turn");
+      return;
+    }
+    // if result is · switch to pc turn and make a move after 1 second
+    if(switchTurn("playerTurn", result) === "pcTurn"){
+      console.log("PC's turn");
+      setTimeout(() => {
+        computerMove(player1.board);
+      },1000);
+    };
+  });
+});
   

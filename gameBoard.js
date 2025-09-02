@@ -29,7 +29,7 @@ export function gameBoard(){
         }
         //if field was hitted before
         if(coords === -2 || coords[0] === -1){
-            return "Hit again"
+            return false;
         }
         // if field is occupied by a ship
         if(coords[0] === 1){
