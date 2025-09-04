@@ -4,13 +4,16 @@ export function factoryShip(length){
     let sunk = false;
     function hit() {
         if(hitted < length) {
-            hitted++;
+            this.hitted++;
+            console.log(hitted, "hitted");
         }    
     }
     function isSunk() {
-        if(hitted === length){
-            return sunk = true;
+        console.log(this.hitted, length, "isSunk");
+        if(this.hitted === length){
+            sunk = true;
+            return true;
         }
     }
-    return {length,hitted,sunk, hit, isSunk, launching}
+    return {length,hitted,get sunk() {return sunk}, hit, isSunk, launching}
 }

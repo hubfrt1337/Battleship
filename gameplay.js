@@ -38,8 +38,11 @@ export const state = {
 
 pcFields.forEach(field => {
   field.addEventListener("click", (e) => { 
+    // if false user can't click because it is pc turn
     if(!state.canClick) return;
+    // get coordinates from data-value attribute convert to array from string
     const coords = JSON.parse(e.target.dataset.value);
+    // if attack was on the same field return whole function and do nothing
     if(!playerPc.board.receiveAttack(coords)){
       console.log("You already clicked this field");
         return;
@@ -48,11 +51,19 @@ pcFields.forEach(field => {
     const result = updateBoards(playerPc.board.matrix, coords);
     // result is either "x" or "·"
     e.target.innerText = result;
+    // check if game is over after player move
+    //if(endGame(playerPc.board)) return;
+    console.log(player1.board.ships, "player board ships")
+    console.log(playerPc.board.ships, "pc board ships")
+
+    // if game is not over switch turn based on result
     // if result is x keep the turn to the player
     if(switchTurn("playerTurn", result) === "playerTurn"){
       console.log("Player's turn");
       return;
     }
+    // pc turns on the bottom
+    // pc turns on the bottom
     // if result is · switch to pc turn and make a move after 1 second
     if(switchTurn("playerTurn", result) === "pcTurn"){
       state.canClick = false;
@@ -64,3 +75,4 @@ pcFields.forEach(field => {
   });
 });
   
+console.log(player1.board.ships, "player ships")

@@ -4,17 +4,23 @@ import { findNeighbours } from "./neighboursFields.js";
 import { checkFields } from "./checkFields.js";
 export function gameBoard(){
     const matrix = Array.from({ length: 10}, () => Array(10).fill(0));
+    // set gameboard with 0 ships placed
     let ships = 0;
-
     function placeShip([y,x], ship, direction){
+        // returns array of coordinates if ship inside the board or false if ship is out of the board
         const spots = findSpots([y,x], ship, direction);
+        // it returns array of the ship coordinates and all of it neighbours
         let neighbours = findNeighbours(spots);
+        // it checks if all fields are empty and returns true or false. if are not empty return false because ship cannot be placed there
         const result = checkFields(neighbours,matrix);
+        // if result is true change matrix values to [1, ship] where 1 means occupied by a ship and ship is the ship object
         if(result){
             spots.forEach(([y,x]) => {
                 matrix[y][x] = [1, ship]
+                // if ship is placed set lanuching to true
                 ship.launching = true;
             })
+            // if ship is placed increase ships counter by 1
             ships++;
             return true;
         }
@@ -34,8 +40,11 @@ export function gameBoard(){
         // if field is occupied by a ship
         if(coords[0] === 1){
             matrix[y][x][1].hit();
+            console.log(matrix[y][x][1])
             if(matrix[y][x][1].isSunk()){
+                console.log("Ship is sunk");
                 ships--;
+                console.log(ships, "ships left")
             }
             return matrix[y][x][0] = -1;
         }
