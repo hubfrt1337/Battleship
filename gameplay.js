@@ -3,7 +3,7 @@ import { gameBoard } from "./gameBoard.js";
 import { computerBoardGenerator } from "./computerBoardGenerator.js";
 import { player } from "./player.js";
 import { showPcDivs, showPlayerDivs } from "./DOMboards.js";
-import { updateBoards, switchTurn, computerMove } from "./actions.js";
+import { updateBoards, switchTurn, computerMove, dotAllNeighbours } from "./actions.js";
 
 
 const carrier = factoryShip(5)
@@ -24,11 +24,10 @@ showPcDivs(playerPc.board.matrix);
 console.log(player1.board.matrix)
 console.log(playerPc.board.matrix)
 
-
-const fields = document.querySelectorAll(".field");
-const pcFields = document.querySelectorAll(".pc-field");
+export const fields = document.querySelectorAll(".field");
+export const pcFields = document.querySelectorAll(".pc-field");
 fields.forEach(field => {
-  field.addEventListener("click", (e) => { console.log(e.target) })
+  field.addEventListener("click", (e) => { console.log(e.target)})
 })  
 // Add event listener to pc fields so player can interact with them
 // canClick flag to prevent multiple clicks while it is pc turn
@@ -47,7 +46,7 @@ pcFields.forEach(field => {
       console.log("You already clicked this field");
         return;
     } 
-
+    
     const result = updateBoards(playerPc.board.matrix, coords);
     // result is either "x" or "·"
     e.target.innerText = result;

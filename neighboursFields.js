@@ -22,16 +22,12 @@ export function findNeighbours(array){
 export function deleteShipFieldsFromNeighbours(arrayShip, arrayNeigh){
     arrayShip = arrayShip.map(el => JSON.stringify(el))
     arrayNeigh = arrayNeigh.map(el => JSON.stringify(el))
-    console.log(arrayShip, "stringi")
     while(arrayShip.length !== 0){
         let shifted = arrayShip.shift()
-        let index = -1;
-        for(let i = 0; i < arrayNeigh.length; i++){
              let index = arrayNeigh.indexOf(shifted);
              if(index) {
                 arrayNeigh.splice(index, 1);
-                break};
-        }
+            };
     }
     return arrayNeigh = arrayNeigh.map(el => JSON.parse(el));
 }
