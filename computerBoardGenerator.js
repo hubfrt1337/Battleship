@@ -1,9 +1,9 @@
 import { factoryShip } from "./battleship.js";
 const carrier = factoryShip(5);
-const battleship = factoryShip(4)
-const cruiser = factoryShip(3);
-const submarine = factoryShip(3)
-const destroyer = factoryShip(2);
+//const battleship = factoryShip(4)
+//const cruiser = factoryShip(3);
+//const submarine = factoryShip(3)
+//const destroyer = factoryShip(2);
 export function computerBoardGenerator(board){
     if(!carrier.launching){
         let placed = false;
@@ -11,6 +11,7 @@ export function computerBoardGenerator(board){
             placed = board.placeShip(randomCoords(), carrier, randomDirection())
         }
     }
+    /*
     if(!battleship.launching){
         let placed = false;
         while(!placed){
@@ -38,6 +39,7 @@ export function computerBoardGenerator(board){
         }
         destroyer.launching = true;
     }
+        */
 }
 
 

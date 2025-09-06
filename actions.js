@@ -31,12 +31,14 @@ export function computerMove(board){
     // result is x or · depends by if it was hitted or missed
     const result = updateBoards(board.matrix, coords);
     // it updates the player's board on the DOM, select players fields because computer is attacking player
+
     const playerFields = document.querySelectorAll(".field");
     playerFields.forEach(field => {
         if(field.dataset.value === JSON.stringify(coords)){
             field.innerText = result;
         };
     });
+    endGame(board);
     // if hitted a ship keep the turn to the computer
     if(switchTurn("pcTurn", result) === "pcTurn"){
         setTimeout(() => {
@@ -50,7 +52,7 @@ export function computerMove(board){
     } 
 }
 // it created and array with all possible moves for the computer;
-const computerArrayOfMoves = [];
+let computerArrayOfMoves = [];
 
 // this function pushes all possible moves to the array, it is written so moves can be reseted after game is over;
 function pushMoves(){
@@ -70,14 +72,16 @@ function getRandomMove(){
     return move;
 }
 
-function endGame(board){
+export function endGame(board){
     if(board.areAllSunk()){
         alert("Game Over");
         state.canClick = false;
+        computerArrayOfMoves = [];
         return true;
     }
     return false;
 }
+
 export function dotAllNeighbours(array, type, context){
     if(type === "pc") {
         type = "pc-field"
@@ -89,10 +93,8 @@ export function dotAllNeighbours(array, type, context){
     console.log(shipAndNeighbours, "shipAndNeighbours");
     const neighboursOnly = deleteShipFieldsFromNeighbours(array, shipAndNeighbours);
     neighboursOnly.forEach( el => {
-        console.log(el, "dotAllNeighbours");
         context.receiveAttack(el)
         const field = document.querySelector(`div.${type}[data-value='${JSON.stringify(el)}']`);
-        console.log(field, "field");
         if(!field) return;
         field.innerText = "·";
     });

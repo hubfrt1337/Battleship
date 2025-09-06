@@ -1,5 +1,5 @@
 import { gameBoard } from "./gameBoard.js";
-export function player(){
-    const board = gameBoard()
+export function player(type){
+    const board = gameBoard(type)
     return { board }
 }

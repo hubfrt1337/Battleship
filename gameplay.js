@@ -3,7 +3,7 @@ import { gameBoard } from "./gameBoard.js";
 import { computerBoardGenerator } from "./computerBoardGenerator.js";
 import { player } from "./player.js";
 import { showPcDivs, showPlayerDivs } from "./DOMboards.js";
-import { updateBoards, switchTurn, computerMove, dotAllNeighbours } from "./actions.js";
+import { updateBoards, switchTurn, computerMove, endGame } from "./actions.js";
 
 
 const carrier = factoryShip(5)
@@ -53,7 +53,7 @@ pcFields.forEach(field => {
     // result is either "x" or "·"
     e.target.innerText = result;
     // check if game is over after player move
-    //if(endGame(playerPc.board)) return;
+    endGame(playerPc.board) 
     console.log(player1.board.ships, "player board ships")
     console.log(playerPc.board.ships, "pc board ships")
 
