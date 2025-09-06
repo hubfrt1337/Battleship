@@ -1,5 +1,6 @@
 // It updates the board based on the coordinates given and returns if it was a hit or a miss;
 import { state } from "./gameplay.js";
+import { findNeighbours, deleteShipFieldsFromNeighbours } from "./neighboursFields.js";
 export function updateBoards(matrix, coords){
     let number = matrix[coords[0]][coords[1]];
         if(Array.isArray(number)){
@@ -77,14 +78,20 @@ function endGame(board){
     }
     return false;
 }
-export function dotAllNeighbours(array, matrix, context){
+export function dotAllNeighbours(array, type, context){
+    if(type === "pc") {
+        type = "pc-field"
+    }
+    if(type === "player") {
+        type = "field"
+    }
     const shipAndNeighbours = findNeighbours(array);
     console.log(shipAndNeighbours, "shipAndNeighbours");
     const neighboursOnly = deleteShipFieldsFromNeighbours(array, shipAndNeighbours);
     neighboursOnly.forEach( el => {
         console.log(el, "dotAllNeighbours");
         context.receiveAttack(el)
-        const field = document.querySelector(`div.pc-field[data-value='${JSON.stringify(el)}']`);
+        const field = document.querySelector(`div.${type}[data-value='${JSON.stringify(el)}']`);
         console.log(field, "field");
         if(!field) return;
         field.innerText = "·";

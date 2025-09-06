@@ -12,7 +12,9 @@ const cruiser = factoryShip(3)
 const submarine = factoryShip(3)
 const destroyer = factoryShip(2)
 const player1 = player();
+player1.board.type = "player";
 const playerPc = player();
+playerPc.board.type = "pc";
 player1.board.placeShip([9, 1], carrier, "vertical");
 player1.board.placeShip([1, 0], battleship, "horizontal");
 player1.board.placeShip([3, 0], cruiser, "horizontal");
@@ -24,8 +26,8 @@ showPcDivs(playerPc.board.matrix);
 console.log(player1.board.matrix)
 console.log(playerPc.board.matrix)
 
-export const fields = document.querySelectorAll(".field");
-export const pcFields = document.querySelectorAll(".pc-field");
+const fields = document.querySelectorAll(".field");
+const pcFields = document.querySelectorAll(".pc-field");
 fields.forEach(field => {
   field.addEventListener("click", (e) => { console.log(e.target)})
 })  
