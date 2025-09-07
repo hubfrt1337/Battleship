@@ -26,12 +26,26 @@ header{
 }
 .ships{
     display: flex;
+    flex-wrap: wrap;
+    width: 80vw;
+    gap: 0.5rem;
+    justify-content: space-evenly;
+}
+.ship{
+    display: flex;
+}
+.shipField{
+    display: flex;
+    align-items: center;
     justify-content: center;
-    
+    border: 2px solid blue;
+    border-left: none;
+
 }
-.ships>div{
-    padding: 1rem;
+.shipField:first-child{
+    border-left: 2px solid blue;
 }
+
 .sea{
     width: 80vw;
     background-image: linear-gradient(rgba(100,100,100,0.4), rgba(150,150,150,0.4)),url(../images/sea.jpg);
@@ -94,3 +108,4 @@ span.miss{
 .miss{
     color: black;
 }
+

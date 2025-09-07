@@ -2,7 +2,7 @@ import { factoryShip } from "./battleship.js";
 import { gameBoard } from "./gameBoard.js";
 import { computerBoardGenerator } from "./computerBoardGenerator.js";
 import { player } from "./player.js";
-import { showPcDivs, showPlayerDivs } from "./DOMboards.js";
+import { showPcDivs, showPlayerDivs, carrierBox } from "./DOMboards.js";
 import { updateBoards, switchTurn, computerMove, endGame } from "./actions.js";
 
 
@@ -82,4 +82,21 @@ pcFields.forEach(field => {
   });
 });
   
-console.log(player1.board.ships, "player ships")
+carrierBox.addEventListener("click", () => {
+  console.log(carrierBox, "carrierBox");
+});
+let field = document.querySelector(".field");
+let size = window.getComputedStyle(field)
+const shipFields = document.querySelectorAll(".shipField")
+  shipFields.forEach(div => {
+  div.style.width = size.width;
+  div.style.height = size.height;
+});
+window.addEventListener("resize", () => {
+  field = document.querySelector(".field");
+  let size = window.getComputedStyle(field)
+  shipFields.forEach(div => {
+  div.style.width = size.width;
+  div.style.height = size.height;
+});
+  });
