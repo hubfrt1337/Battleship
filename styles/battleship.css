@@ -3,11 +3,14 @@
     padding: 0;
     box-sizing: border-box;
 }
-main{
-    height: 100vh;
+html{
+    height: 100%;
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
     background-color: #522d0e;
     background-repeat: repeat;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+main{
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -31,8 +34,7 @@ header{
 }
 .sea{
     width: 80vw;
-    height: 80vh;
-    background-image: url(../images/sea.jpg);
+    background-image: linear-gradient(rgba(100,100,100,0.4), rgba(150,150,150,0.4)),url(../images/sea.jpg);
     border: black solid 5px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -41,26 +43,54 @@ header{
 }
 .player-board,
 .pc-board{
+    z-index: 1;
+    position: relative;
     padding: 1rem;
     border: 1px solid black;
     display: grid;
     grid-template-columns: repeat(10,1fr);
+    grid-template-rows: repeat(10,1fr);
     align-items: center;
     justify-items: center;
-    gap: 1px;
     color: white;
+}
+.player-board::before,
+.pc-board::before{
+    z-index: -1;
+    position: absolute;
+    inset: 1rem;
+    content: "";
+    background-color: rgb(255, 255, 255,0.3);
+    
 }
 .field,
 .pc-field{
+    box-shadow: inset 2px 0 white, inset -2px 0 black, inset 0 2px white, inset 0 -2px black;
     display: flex;
-    width: 100%;
-    height: 100%;
     justify-content: center;
     align-items: center;
+    font-size: 2rem;
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
 }
 .field:hover,
 .pc-field:hover{
     background-color: burlywood;
     
+}
+span.hit,
+span.miss{
+    font-size: 2rem;
+    font-weight: bold;
+    pointer-events: none;
+    margin-bottom: 8px;
+    margin-left: 1px;
+}
+.hit{
+    color: red;
+}
+.miss{
+    color: black;
 }
