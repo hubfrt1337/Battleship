@@ -31,11 +31,13 @@ export function computerMove(board){
     // result is x or · depends by if it was hitted or missed
     const result = updateBoards(board.matrix, coords);
     // it updates the player's board on the DOM, select players fields because computer is attacking player
-
+    const span = document.createElement("span");
+    span.className = result === "x" ? "hit" : "miss";
+    span.innerText = result;
     const playerFields = document.querySelectorAll(".field");
     playerFields.forEach(field => {
         if(field.dataset.value === JSON.stringify(coords)){
-            field.innerText = result;
+            field.appendChild(span)
         };
     });
     endGame(board);

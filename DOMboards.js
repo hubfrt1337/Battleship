@@ -1,11 +1,16 @@
 const playerBoard = document.querySelector(".js-player-board");
 const pcBoard = document.querySelector(".js-pc-board");
+const carrierBox = document.querySelector(".carrier");
+const battleshipBox = document.querySelector(".battleship");
+const cruiserBox = document.querySelector(".cruiser");
+const submarineBox = document.querySelector(".submarine");
+const destroyerBox = document.querySelector(".destroyer");
 
   function createDiv(name) {
     const boardDiv = document.createElement("div");
 
     boardDiv.className = name;
-    boardDiv.innerText = "0";
+    boardDiv.innerText = "";
 
     return boardDiv;
   }
@@ -28,3 +33,8 @@ const pcBoard = document.querySelector(".js-pc-board");
       }
     }
   }
+
+export function placeShipOnBoard(ship, direction, coords, board){
+  ship.addEventListener("dragstart", (e) => {
+})
+}

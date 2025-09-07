@@ -51,7 +51,13 @@ pcFields.forEach(field => {
     
     const result = updateBoards(playerPc.board.matrix, coords);
     // result is either "x" or "·"
-    e.target.innerText = result;
+    const span = document.createElement("span");
+    span.className = result === "x" ? "hit" : "miss";
+    span.innerText = result;
+    e.target.appendChild(span);
+    // display result on the field
+    //
+    
     // check if game is over after player move
     endGame(playerPc.board) 
     console.log(player1.board.ships, "player board ships")
