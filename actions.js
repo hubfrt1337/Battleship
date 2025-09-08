@@ -1,5 +1,5 @@
 // It updates the board based on the coordinates given and returns if it was a hit or a miss;
-import { state,  currentShip, direction, loopClass, glowRedIfNoSpots, carrier} from "./gameplay.js";
+import { state,  currentShip, direction, loopClass, glowRedIfNoSpots} from "./gameplay.js";
 import { findNeighbours, deleteShipFieldsFromNeighbours } from "./neighboursFields.js";
 import { findSpots } from "./findSpots.js";
 import { computerBoardGenerator } from "./computerBoardGenerator.js";
