@@ -1,5 +1,5 @@
 // It updates the board based on the coordinates given and returns if it was a hit or a miss;
-import { state,  currentShip, direction } from "./gameplay.js";
+import { state,  currentShip, direction, loopClass, glowRedIfNoSpots } from "./gameplay.js";
 import { findNeighbours, deleteShipFieldsFromNeighbours } from "./neighboursFields.js";
 import { findSpots } from "./findSpots.js";
 export function updateBoards(matrix, coords){
@@ -111,7 +111,8 @@ export function pickShip(ship){
 export function glowTheField(coords, currentShip, direction, target){
     const spots = findSpots(coords, currentShip, direction)
      if(!spots){
-        target.style.backgroundColor = "red"; 
+        const array = glowRedIfNoSpots(coords, currentShip, direction);
+        loopClass(coords, array, "red")
         return;
     }
     for(let i = 0; i < spots.length; i++){
@@ -123,7 +124,11 @@ export function glowTheField(coords, currentShip, direction, target){
 
 export function clearGlow(coords, currentShip, direction, target){
     const spots = findSpots(coords, currentShip, direction);
-    if(!spots) return;
+    if(!spots) {
+        const array = glowRedIfNoSpots(coords, currentShip, direction);
+        loopClass(coords, array, "clear")
+        return;
+    }
     for(let i = 0; i < spots.length; i++){
         const field = document.querySelector(`.field[data-value="${JSON.stringify(spots[i])}"]`);
         field.style.backgroundColor = "";

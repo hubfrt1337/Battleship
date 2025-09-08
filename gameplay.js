@@ -22,7 +22,7 @@ console.log(player1.board.matrix)
 console.log(playerPc.board.matrix)
 
 export let currentShip = carrier;
-export let direction = "vertical";
+export let direction = "horizontal";
 const fields = document.querySelectorAll(".field");
 const pcFields = document.querySelectorAll(".pc-field");
 // click event on player board
@@ -74,7 +74,6 @@ playerBoard.addEventListener("mouseover", (e) => {
 })
 playerBoard.addEventListener("mouseout", (e) => {
   if(!e.target.classList.contains("field")) return;
-  e.target.style.backgroundColor = "";
   const coords = JSON.parse(e.target.dataset.value);
   clearGlow(coords, currentShip, direction, e.target);
 });
@@ -164,7 +163,7 @@ window.addEventListener("resize", () => {
     }
 };
 
-function loopClass(coords, spots, method){
+export function loopClass(coords, spots, method){
 spots.forEach(([y,x]) => {
     const field = document.querySelector(`.field[data-value='${JSON.stringify([y,x])}']`);
     if(method === "add"){
@@ -177,7 +176,7 @@ spots.forEach(([y,x]) => {
   });
 }
 
-function glowRedIfNoSpots(coords, ship, direction){
+export function glowRedIfNoSpots(coords, ship, direction){
   const array = [coords]
   for(let i = 1; i < ship.length; i ++){
     if(direction === "horizontal"){
