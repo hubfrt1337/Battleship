@@ -1,10 +1,11 @@
-// It updates the board based on the coordinates given and returns if it was a hit or a miss;
 import { state,  currentShip, direction, loopClass, glowRedIfNoSpots} from "./gameplay.js";
 import { findNeighbours, deleteShipFieldsFromNeighbours } from "./neighboursFields.js";
 import { findSpots } from "./findSpots.js";
 import { computerBoardGenerator } from "./computerBoardGenerator.js";
 const random = document.querySelector(".random");
 const change = document.querySelector(".change");
+
+// It updates the board based on the coordinates given and returns if it was a hit or a miss;
 export function updateBoards(matrix, coords){
     let number = matrix[coords[0]][coords[1]];
         if(Array.isArray(number)){
@@ -102,7 +103,11 @@ export function dotAllNeighbours(array, type, context){
         context.receiveAttack(el)
         const field = document.querySelector(`div.${type}[data-value='${JSON.stringify(el)}']`);
         if(!field) return;
-        field.innerText = "·";
+        const span = document.createElement("span")
+        span.classList.add("miss")
+        span.textContent = "·";
+        field.textContent = "";
+        field.appendChild(span)
     });
 }
 export function pickShip(ship){
@@ -111,6 +116,7 @@ export function pickShip(ship){
     ship.classList.add("picked");
 }
 
+// it glows the fields where player is trying to place a ship by mouseOn 
 export function glowTheField(coords, currentShip, direction, target){
     const spots = findSpots(coords, currentShip, direction)
      if(!spots){
@@ -125,6 +131,7 @@ export function glowTheField(coords, currentShip, direction, target){
      target.style.backgroundColor = "navy";
 }
 
+// it clear's glow made by player mouse event when player is trying to place ship
 export function clearGlow(coords, currentShip, direction, target){
     const spots = findSpots(coords, currentShip, direction);
     if(!spots) {
@@ -138,10 +145,17 @@ export function clearGlow(coords, currentShip, direction, target){
     }
 }
 
+// it generates random placement of ships for player board
 export function addListener(board, carrier, battleship, cruiser, submarine, destroyer){
-    console.log(random)
     random.addEventListener("click", () => {
-        computerBoardGenerator(board, carrier, battleship, cruiser, submarine, destroyer);
-        console.log(board.matrix)
+        const array = computerBoardGenerator(board, carrier, battleship, cruiser, submarine, destroyer);
+        showShipsOnPlayerBoard(array)
+    })
+}
+
+function showShipsOnPlayerBoard(array){
+    array.forEach(([y,x]) => {
+        const field = document.querySelector(`.field[data-value="${JSON.stringify([y,x])}"]`)
+        field.classList.add("shipPlaced")
     })
 }

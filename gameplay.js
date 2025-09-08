@@ -18,8 +18,7 @@ playerPc.board.type = "pc";
 computerBoardGenerator(playerPc.board, carrierPc, battleshipPc, cruiserPc, submarinePc, destroyerPc);
 showPlayerDivs(player1.board.matrix);
 showPcDivs(playerPc.board.matrix);
-console.log(player1.board.matrix)
-console.log(playerPc.board.matrix)
+
 
 export let currentShip = carrier;
 export let direction = "horizontal";
@@ -106,13 +105,11 @@ pcFields.forEach(field => {
     
     // check if game is over after player move
     endGame(playerPc.board) 
-    console.log(player1.board.ships, "player board ships")
-    console.log(playerPc.board.ships, "pc board ships")
+    
 
     // if game is not over switch turn based on result
     // if result is x keep the turn to the player
     if(switchTurn("playerTurn", result) === "playerTurn"){
-      console.log("Player's turn");
       return;
     }
     // pc turns on the bottom
@@ -120,7 +117,6 @@ pcFields.forEach(field => {
     // if result is · switch to pc turn and make a move after 1 second
     if(switchTurn("playerTurn", result) === "pcTurn"){
       state.canClick = false;
-      console.log("PC's turn");
       setTimeout(() => {
         computerMove(player1.board);
       },1000);

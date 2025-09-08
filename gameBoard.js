@@ -23,7 +23,7 @@ export function gameBoard(type){
             })
             // if ship is placed increase ships counter by 1
             ships++;
-            return true;
+            return spots;
         }
         else return false; // some infomartion to user
         //neighbours = deleteShipFieldsFromNeighbours(spots, neighbours)

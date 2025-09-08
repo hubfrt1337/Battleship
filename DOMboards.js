@@ -36,7 +36,5 @@ const field = document.querySelector(".field");
   }
 
 
-export function placeShipOnBoard(ship, direction, coords, board){
-  
-}
+
 
