@@ -22,30 +22,46 @@ console.log(player1.board.matrix)
 console.log(playerPc.board.matrix)
 
 export let currentShip = carrier;
-export let direction = "horizontal";
+export let direction = "vertical";
 const fields = document.querySelectorAll(".field");
 const pcFields = document.querySelectorAll(".pc-field");
+// click event on player board
 fields.forEach(field => {
   field.addEventListener("click", (e) => { 
     const coords = JSON.parse(e.target.dataset.value);
-    console.log(e.target, coords)
+    // if ship is not launched check if it is possible to place it on specific coordinates and place it
     if(currentShip.launching === false) {
       if(player1.board.placeShip(coords, currentShip, direction)){
         const spots = findSpots(coords, currentShip, direction);
-        spots.forEach(([y,x]) => {
-          const field = document.querySelector(`.field[data-value='${JSON.stringify([y,x])}']`);
-          field.classList.add("shipPlaced")
-        });
-       // e.target.style.backgroundColor = "";
+        loopClass(coords, spots, "add")
         currentShip.launching = true;
-        console.log(currentShip)
+      } // if the ship can't be placed make the fields red for 0.5sec
+        else {
+        const spots = findSpots(coords, currentShip, direction);
+        // if ship is not out of board use this
+        if(spots){
+          loopClass(coords, spots, "red")
+          setTimeout(() => {
+            loopClass(coords, spots, "clear")
+          }, 500);
+        } // if the ship will be out ouf board use special method to display fields red color 
+        else {
+          const array = glowRedIfNoSpots(coords, currentShip, direction)
+          loopClass(coords, array, "red")
+            setTimeout(() => {
+            loopClass(coords, array, "clear")
+          }, 500);
+        }
       }
-    } else {
-        e.target.style.backgroundColor = "red";
-        setTimeout(() => {
-          e.target.style.backgroundColor = "";
-        }, 500);
     }
+    // jesli statek bedzie postawiony po prostu musze wyłaczyc go to na dole niepotrzebne bedzie
+    /* else {
+        const spots = findSpots(coords, currentShip, direction);
+        loopClass(coords, spots, "red")
+        setTimeout(() => {
+          loopClass(coords, spots, "clear")
+        }, 500);
+    } */
   })
 })  
 
@@ -147,3 +163,33 @@ window.addEventListener("resize", () => {
         case "destroyer": return currentShip = destroyer;
     }
 };
+
+function loopClass(coords, spots, method){
+spots.forEach(([y,x]) => {
+    const field = document.querySelector(`.field[data-value='${JSON.stringify([y,x])}']`);
+    if(method === "add"){
+      field.classList.add("shipPlaced")
+    } else if(method === "red"){
+      field.style.backgroundColor = "red"
+    } else if(method === "clear"){
+      field.style.backgroundColor = ""
+    }
+  });
+}
+
+function glowRedIfNoSpots(coords, ship, direction){
+  const array = [coords]
+  for(let i = 1; i < ship.length; i ++){
+    if(direction === "horizontal"){
+      if(coords[1] + i <= 9){
+        array.push([coords[0], coords[1] + i])
+      }
+    } 
+    else if(direction === "vertical"){
+      if(coords[0] - i >= 0){
+        array.push([coords[0] - i, coords[1]])
+      }
+    }
+  }
+  return array;
+}
