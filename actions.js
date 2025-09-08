@@ -1,6 +1,7 @@
 // It updates the board based on the coordinates given and returns if it was a hit or a miss;
-import { state } from "./gameplay.js";
+import { state,  currentShip, direction } from "./gameplay.js";
 import { findNeighbours, deleteShipFieldsFromNeighbours } from "./neighboursFields.js";
+import { findSpots } from "./findSpots.js";
 export function updateBoards(matrix, coords){
     let number = matrix[coords[0]][coords[1]];
         if(Array.isArray(number)){
@@ -100,4 +101,31 @@ export function dotAllNeighbours(array, type, context){
         if(!field) return;
         field.innerText = "·";
     });
+}
+export function pickShip(ship){
+    const ships = document.querySelectorAll(".ship");
+    ships.forEach(s => s.classList.remove("picked"));
+    ship.classList.add("picked");
+}
+
+export function glowTheField(coords, currentShip, direction, target){
+    const spots = findSpots(coords, currentShip, direction)
+     if(!spots){
+        target.style.backgroundColor = "red"; 
+        return;
+    }
+    for(let i = 0; i < spots.length; i++){
+        const field = document.querySelector(`.field[data-value="${JSON.stringify(spots[i])}"]`);
+        field.style.backgroundColor = "navy";
+    }
+     target.style.backgroundColor = "navy";
+}
+
+export function clearGlow(coords, currentShip, direction, target){
+    const spots = findSpots(coords, currentShip, direction);
+    if(!spots) return;
+    for(let i = 0; i < spots.length; i++){
+        const field = document.querySelector(`.field[data-value="${JSON.stringify(spots[i])}"]`);
+        field.style.backgroundColor = "";
+    }
 }

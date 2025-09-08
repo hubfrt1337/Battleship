@@ -59,7 +59,7 @@ header{
 .pc-board{
     z-index: 1;
     position: relative;
-    padding: 1rem;
+    padding: 2rem;
     border: 1px solid black;
     display: grid;
     grid-template-columns: repeat(10,1fr);
@@ -72,7 +72,7 @@ header{
 .pc-board::before{
     z-index: -1;
     position: absolute;
-    inset: 1rem;
+    inset: 2rem;
     content: "";
     background-color: rgb(255, 255, 255,0.3);
     
@@ -109,3 +109,10 @@ span.miss{
     color: black;
 }
 
+.picked{
+    background-color: navy;
+}
+
+.shipPlaced{
+    background-color: navy;
+}

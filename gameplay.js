@@ -1,42 +1,73 @@
 import { factoryShip } from "./battleship.js";
-import { gameBoard } from "./gameBoard.js";
 import { computerBoardGenerator } from "./computerBoardGenerator.js";
 import { player } from "./player.js";
 import { showPcDivs, showPlayerDivs, carrierBox } from "./DOMboards.js";
-import { updateBoards, switchTurn, computerMove, endGame } from "./actions.js";
+import { updateBoards, switchTurn, computerMove, endGame, pickShip, glowTheField, clearGlow} from "./actions.js";
+import { findSpots } from "./findSpots.js";
 
 
-const carrier = factoryShip(5)
-const battleship = factoryShip(4)
-const cruiser = factoryShip(3)
-const submarine = factoryShip(3)
-const destroyer = factoryShip(2)
+export const carrier = factoryShip(5)
+export const battleship = factoryShip(4)
+export const cruiser = factoryShip(3)
+export const submarine = factoryShip(3)
+export const destroyer = factoryShip(2)
 const player1 = player();
 player1.board.type = "player";
 const playerPc = player();
 playerPc.board.type = "pc";
-player1.board.placeShip([9, 1], carrier, "vertical");
-player1.board.placeShip([1, 0], battleship, "horizontal");
-player1.board.placeShip([3, 0], cruiser, "horizontal");
-player1.board.placeShip([7, 9], submarine, "vertical");
-player1.board.placeShip([3, 7], destroyer, "horizontal");
 computerBoardGenerator(playerPc.board);
 showPlayerDivs(player1.board.matrix);
 showPcDivs(playerPc.board.matrix);
 console.log(player1.board.matrix)
 console.log(playerPc.board.matrix)
 
+export let currentShip = carrier;
+export let direction = "horizontal";
 const fields = document.querySelectorAll(".field");
 const pcFields = document.querySelectorAll(".pc-field");
 fields.forEach(field => {
-  field.addEventListener("click", (e) => { console.log(e.target)})
+  field.addEventListener("click", (e) => { 
+    const coords = JSON.parse(e.target.dataset.value);
+    console.log(e.target, coords)
+    if(currentShip.launching === false) {
+      if(player1.board.placeShip(coords, currentShip, direction)){
+        const spots = findSpots(coords, currentShip, direction);
+        spots.forEach(([y,x]) => {
+          const field = document.querySelector(`.field[data-value='${JSON.stringify([y,x])}']`);
+          field.classList.add("shipPlaced")
+        });
+       // e.target.style.backgroundColor = "";
+        currentShip.launching = true;
+        console.log(currentShip)
+      }
+    } else {
+        e.target.style.backgroundColor = "red";
+        setTimeout(() => {
+          e.target.style.backgroundColor = "";
+        }, 500);
+    }
+  })
 })  
+
+
+const playerBoard = document.querySelector(".js-player-board");
+playerBoard.addEventListener("mouseover", (e) => {
+  if(!e.target.classList.contains("field")) return;
+  const coords = JSON.parse(e.target.dataset.value);
+  glowTheField(coords, currentShip, direction, e.target);
+})
+playerBoard.addEventListener("mouseout", (e) => {
+  if(!e.target.classList.contains("field")) return;
+  e.target.style.backgroundColor = "";
+  const coords = JSON.parse(e.target.dataset.value);
+  clearGlow(coords, currentShip, direction, e.target);
+});
+
 // Add event listener to pc fields so player can interact with them
 // canClick flag to prevent multiple clicks while it is pc turn
 export const state = {
   canClick: true,
 };
-
 pcFields.forEach(field => {
   field.addEventListener("click", (e) => { 
     // if false user can't click because it is pc turn
@@ -81,10 +112,16 @@ pcFields.forEach(field => {
     };
   });
 });
+  document.querySelectorAll(".ship").forEach(ship => {
+    ship.addEventListener("click", (e) => {
+      pickShip(ship);
+      currentShip = shipNameToShipObject(ship.dataset.name);
+    });
+  });
+
   
-carrierBox.addEventListener("click", () => {
-  console.log(carrierBox, "carrierBox");
-});
+
+// ship fields are interactive to size them based on field size
 let field = document.querySelector(".field");
 let size = window.getComputedStyle(field)
 const shipFields = document.querySelectorAll(".shipField")
@@ -100,3 +137,13 @@ window.addEventListener("resize", () => {
   div.style.height = size.height;
 });
   });
+
+  function shipNameToShipObject(name){
+    switch(name){
+        case "carrier": return currentShip = carrier;
+        case "battleship": return currentShip = battleship;
+        case "cruiser": return currentShip = cruiser;
+        case "submarine": return currentShip = submarine;
+        case "destroyer": return currentShip = destroyer;
+    }
+};
