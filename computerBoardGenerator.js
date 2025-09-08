@@ -1,42 +1,44 @@
 import { factoryShip } from "./battleship.js";
-const carrier = factoryShip(5);
-const battleship = factoryShip(4)
-const cruiser = factoryShip(3);
-const submarine = factoryShip(3)
-const destroyer = factoryShip(2);
-export function computerBoardGenerator(board){
-    if(!carrier.launching){
+export const carrierPc = factoryShip(5);
+export const battleshipPc = factoryShip(4)
+export const cruiserPc = factoryShip(3);
+export const submarinePc = factoryShip(3)
+export const destroyerPc = factoryShip(2);
+export function computerBoardGenerator(board, carrierEl, battleshipEl, cruiserEl, submarineEl, destroyerEl){
+    if(!carrierEl.launching){
         let placed = false;
         while(!placed){
-            placed = board.placeShip(randomCoords(), carrier, randomDirection())
+            placed = board.placeShip(randomCoords(), carrierEl, randomDirection())
         }
+        carrierEl.launching = true;
     }
-    if(!battleship.launching){
+    if(!battleshipEl.launching){
         let placed = false;
         while(!placed){
-            placed = board.placeShip(randomCoords(), battleship, randomDirection())
+            placed = board.placeShip(randomCoords(), battleshipEl, randomDirection())
         }
+        battleshipEl.launching = true;
     }
-    if(!cruiser.launching){
+    if(!cruiserEl.launching){
         let placed = false;
         while(!placed){
-            placed = board.placeShip(randomCoords(), cruiser, randomDirection())
+            placed = board.placeShip(randomCoords(), cruiserEl, randomDirection())
         }
-        cruiser.launching = true;
+        cruiserEl.launching = true;
     }
-    if(!submarine.launching){
+    if(!submarineEl.launching){
         let placed = false;
         while(!placed){
-            placed = board.placeShip(randomCoords(), submarine, randomDirection())
+            placed = board.placeShip(randomCoords(), submarineEl, randomDirection())
         }
-        submarine.launching = true;
+        submarineEl.launching = true;
     }
-    if(!destroyer.launching){
+    if(!destroyerEl.launching){
         let placed = false;
         while(!placed){
-            placed = board.placeShip(randomCoords(), destroyer, randomDirection())
+            placed = board.placeShip(randomCoords(), destroyerEl, randomDirection())
         }
-        destroyer.launching = true;
+        destroyerEl.launching = true;
     }
 }
 

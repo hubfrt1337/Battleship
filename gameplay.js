@@ -1,21 +1,21 @@
 import { factoryShip } from "./battleship.js";
-import { computerBoardGenerator } from "./computerBoardGenerator.js";
+import { computerBoardGenerator, carrierPc , battleshipPc, cruiserPc, destroyerPc, submarinePc } from "./computerBoardGenerator.js";
 import { player } from "./player.js";
 import { showPcDivs, showPlayerDivs, carrierBox } from "./DOMboards.js";
-import { updateBoards, switchTurn, computerMove, endGame, pickShip, glowTheField, clearGlow} from "./actions.js";
+import { updateBoards, switchTurn, computerMove, endGame, pickShip, glowTheField, clearGlow, addListener} from "./actions.js";
 import { findSpots } from "./findSpots.js";
 
 
-export const carrier = factoryShip(5)
-export const battleship = factoryShip(4)
-export const cruiser = factoryShip(3)
-export const submarine = factoryShip(3)
-export const destroyer = factoryShip(2)
+const carrier = factoryShip(5)
+const battleship = factoryShip(4)
+const cruiser = factoryShip(3)
+const submarine = factoryShip(3)
+const destroyer = factoryShip(2)
 const player1 = player();
 player1.board.type = "player";
 const playerPc = player();
 playerPc.board.type = "pc";
-computerBoardGenerator(playerPc.board);
+computerBoardGenerator(playerPc.board, carrierPc, battleshipPc, cruiserPc, submarinePc, destroyerPc);
 showPlayerDivs(player1.board.matrix);
 showPcDivs(playerPc.board.matrix);
 console.log(player1.board.matrix)
@@ -192,3 +192,5 @@ export function glowRedIfNoSpots(coords, ship, direction){
   }
   return array;
 }
+
+addListener(player1.board, carrier, battleship, cruiser, submarine, destroyer)

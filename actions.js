@@ -1,7 +1,10 @@
 // It updates the board based on the coordinates given and returns if it was a hit or a miss;
-import { state,  currentShip, direction, loopClass, glowRedIfNoSpots } from "./gameplay.js";
+import { state,  currentShip, direction, loopClass, glowRedIfNoSpots, carrier} from "./gameplay.js";
 import { findNeighbours, deleteShipFieldsFromNeighbours } from "./neighboursFields.js";
 import { findSpots } from "./findSpots.js";
+import { computerBoardGenerator } from "./computerBoardGenerator.js";
+const random = document.querySelector(".random");
+const change = document.querySelector(".change");
 export function updateBoards(matrix, coords){
     let number = matrix[coords[0]][coords[1]];
         if(Array.isArray(number)){
@@ -133,4 +136,12 @@ export function clearGlow(coords, currentShip, direction, target){
         const field = document.querySelector(`.field[data-value="${JSON.stringify(spots[i])}"]`);
         field.style.backgroundColor = "";
     }
+}
+
+export function addListener(board, carrier, battleship, cruiser, submarine, destroyer){
+    console.log(random)
+    random.addEventListener("click", () => {
+        computerBoardGenerator(board, carrier, battleship, cruiser, submarine, destroyer);
+        console.log(board.matrix)
+    })
 }
