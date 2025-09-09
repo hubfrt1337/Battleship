@@ -33,9 +33,9 @@ header{
 }
 .ship{
     display: flex;
+    cursor: pointer;
 }
 .shipField{
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -151,4 +151,10 @@ span.miss{
 .change:hover,
 .random:hover{
     background-color: rgb(59, 59, 240);
+}
+
+.used{
+    background-color: navy;
+    cursor: not-allowed;
+    opacity: 0.5;
 }

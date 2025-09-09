@@ -159,3 +159,6 @@ function showShipsOnPlayerBoard(array){
         field.classList.add("shipPlaced")
     })
 }
+export function clearPickedShip(){
+    
+}

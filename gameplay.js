@@ -33,7 +33,11 @@ fields.forEach(field => {
       if(player1.board.placeShip(coords, currentShip, direction)){
         const spots = findSpots(coords, currentShip, direction);
         loopClass(coords, spots, "add")
-        currentShip.launching = true;
+        const currentShipBox = document.querySelector(".ship.picked");
+        currentShipBox.classList.remove("picked")
+        currentShipBox.classList.add("used")
+        currentShipBox.removeEventListener("click", handlePickEvent)
+        darkenShipBox(currentShip)
       } // if the ship can't be placed make the fields red for 0.5sec
         else {
         const spots = findSpots(coords, currentShip, direction);
@@ -123,11 +127,13 @@ pcFields.forEach(field => {
     };
   });
 });
+ function handlePickEvent(e){
+  const ship = e.currentTarget;
+  pickShip(ship)
+  currentShip = shipNameToShipObject(ship.dataset.name)
+ }
   document.querySelectorAll(".ship").forEach(ship => {
-    ship.addEventListener("click", (e) => {
-      pickShip(ship);
-      currentShip = shipNameToShipObject(ship.dataset.name);
-    });
+    ship.addEventListener("click", handlePickEvent);
   });
 
   
