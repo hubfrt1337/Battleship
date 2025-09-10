@@ -1,4 +1,4 @@
-import { state,  currentShip, direction, loopClass, glowRedIfNoSpots} from "./gameplay.js";
+import { state, loopClass, glowRedIfNoSpots, handlePickEvent} from "./gameplay.js";
 import { findNeighbours, deleteShipFieldsFromNeighbours } from "./neighboursFields.js";
 import { findSpots } from "./findSpots.js";
 import { computerBoardGenerator } from "./computerBoardGenerator.js";
@@ -150,6 +150,11 @@ export function addListener(board, carrier, battleship, cruiser, submarine, dest
     random.addEventListener("click", () => {
         const array = computerBoardGenerator(board, carrier, battleship, cruiser, submarine, destroyer);
         showShipsOnPlayerBoard(array)
+        const ships = document.querySelectorAll(".ship")
+        ships.forEach(ship => {
+            ship.classList.add("used")
+            ship.removeEventListener("click", handlePickEvent)
+        })
     })
 }
 
