@@ -37,6 +37,9 @@ fields.forEach(field => {
         currentShipBox.classList.remove("picked")
         currentShipBox.classList.add("used")
         currentShipBox.removeEventListener("click", handlePickEvent)
+        if(player1.board.ships === 5){
+          state.canPlay = true;
+        }
       } // if the ship can't be placed make the fields red for 0.5sec
         else {
         const spots = findSpots(coords, currentShip, direction);
@@ -87,11 +90,13 @@ playerBoard.addEventListener("mouseout", (e) => {
 // canClick flag to prevent multiple clicks while it is pc turn
 export const state = {
   canClick: true,
+  canPlay: false,
 };
 pcFields.forEach(field => {
   field.addEventListener("click", (e) => { 
     // if false user can't click because it is pc turn
     if(!state.canClick) return;
+    if(!state.canPlay) return;
     // get coordinates from data-value attribute convert to array from string
     const coords = JSON.parse(e.target.dataset.value);
     // if attack was on the same field return whole function and do nothing

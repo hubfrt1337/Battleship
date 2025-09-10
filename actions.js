@@ -151,6 +151,7 @@ export function addListener(board, carrier, battleship, cruiser, submarine, dest
         const array = computerBoardGenerator(board, carrier, battleship, cruiser, submarine, destroyer);
         showShipsOnPlayerBoard(array)
         const ships = document.querySelectorAll(".ship")
+        state.canPlay = true;
         ships.forEach(ship => {
             ship.classList.add("used")
             ship.removeEventListener("click", handlePickEvent)
