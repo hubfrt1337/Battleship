@@ -16,6 +16,7 @@ export function gameBoard(type){
         const result = checkFields(neighbours,matrix);
         // if result is true change matrix values to [1, ship] where 1 means occupied by a ship and ship is the ship object
         if(result){
+            console.log(matrix)
             spots.forEach(([y,x]) => {
                 matrix[y][x] = [1, ship]
                 // if ship is placed set lanuching to true
@@ -54,9 +55,9 @@ export function gameBoard(type){
         if(!ships) return true;
     }
     function clearMatrix(){
-        this.matrix = Array.from({ length: 10}, () => Array(10).fill(0));
+        matrix = Array.from({ length: 10}, () => Array(10).fill(0));
     }
-    return {matrix, placeShip, receiveAttack, areAllSunk, get ships(){return ships}, type, clearMatrix};
+    return {set matrix(val) {matrix = val}, get matrix(){return matrix}, placeShip, receiveAttack, areAllSunk, get ships(){return ships}, type, clearMatrix};
 }
 
 // I am not using this function actually.

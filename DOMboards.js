@@ -1,11 +1,6 @@
 const playerBoard = document.querySelector(".js-player-board");
 const pcBoard = document.querySelector(".js-pc-board");
-export const carrierBox = document.querySelector(".carrier");
-const battleshipBox = document.querySelector(".battleship");
-const cruiserBox = document.querySelector(".cruiser");
-const submarineBox = document.querySelector(".submarine");
-const destroyerBox = document.querySelector(".destroyer");
-const field = document.querySelector(".field");
+
 
   function createDiv(name) {
     const boardDiv = document.createElement("div");

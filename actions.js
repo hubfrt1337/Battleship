@@ -205,7 +205,9 @@ function resetGame(){
     playerPc.board.clearMatrix();
     player1.board.clearMatrix();
     resetShips();
-    computerBoardGenerator(playerPc.board, carrierPc, battleshipPc, cruiserPc, submarinePc, destroyerPc)
+    const arr = computerBoardGenerator(playerPc.board, carrierPc, 
+    battleshipPc, cruiserPc, submarinePc, destroyerPc)
+    console.log(arr)
     console.log(playerPc.board.matrix)
     showPcDivs(playerPc.board.matrix)
     showPlayerDivs(player1.board.matrix)
@@ -217,5 +219,5 @@ function resetShips(){
     cruiserPc.resetShip();
     submarinePc.resetShip();
     destroyerPc.resetShip();
-    
+    console.log(carrierPc)
 }
