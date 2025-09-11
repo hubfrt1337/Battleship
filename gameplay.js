@@ -15,7 +15,8 @@ const player1 = player();
 player1.board.type = "player";
 const playerPc = player();
 playerPc.board.type = "pc";
-computerBoardGenerator(playerPc.board, carrierPc, battleshipPc, cruiserPc, submarinePc, destroyerPc);
+playerPc.board.placeShip([0,0], destroyer, "horizontal")
+//computerBoardGenerator(playerPc.board, carrierPc, battleshipPc, cruiserPc, submarinePc, destroyerPc);
 showPlayerDivs(player1.board.matrix);
 showPcDivs(playerPc.board.matrix);
 
@@ -102,7 +103,6 @@ pcFields.forEach(field => {
     const coords = JSON.parse(e.target.dataset.value);
     // if attack was on the same field return whole function and do nothing
     if(!playerPc.board.receiveAttack(coords)){
-      console.log("You already clicked this field");
         return;
     } 
     
@@ -220,3 +220,6 @@ function handleChangeEvent(e){
   }
 }
 change.addEventListener("click", handleChangeEvent)
+
+console.log(playerPc.board.matrix)
+

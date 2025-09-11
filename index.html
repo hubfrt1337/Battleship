@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./styles/battleship.css">
 </head>
 <body>
+    <div class="announcement"></div>
     <main>
         <header>Battleship</header>
         <div class="ships">
@@ -46,8 +47,11 @@
         </div>
         <div class="sea">
             <div class="player-board js-player-board">
+                <div class="player-name-board">My Board</div>
             </div>        
-            <div class="pc-board js-pc-board"></div>
+            <div class="pc-board js-pc-board">
+                <div class="player-name-board">Computer Board</div>
+            </div>
         </div>
     </main>
     <script type="module" src="gameplay.js"></script>

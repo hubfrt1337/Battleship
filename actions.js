@@ -3,7 +3,7 @@ import { findNeighbours, deleteShipFieldsFromNeighbours } from "./neighboursFiel
 import { findSpots } from "./findSpots.js";
 import { computerBoardGenerator } from "./computerBoardGenerator.js";
 const random = document.querySelector(".random");
-
+const info = document.querySelector(".announcement")
 
 // It updates the board based on the coordinates given and returns if it was a hit or a miss;
 export function updateBoards(matrix, coords){
@@ -81,7 +81,7 @@ function getRandomMove(){
 
 export function endGame(board){
     if(board.areAllSunk()){
-        alert("Game Over");
+        displayInfo(board)
         state.canClick = false;
         computerArrayOfMoves = [];
         return true;
@@ -163,6 +163,25 @@ function showShipsOnPlayerBoard(array){
     array.forEach(([y,x]) => {
         const field = document.querySelector(`.field[data-value="${JSON.stringify([y,x])}"]`)
         field.classList.add("shipPlaced")
+    })
+}
+
+function displayInfo(board){
+    info.style.zIndex = "5"
+    info.style.opacity = "1"
+    const btn = document.createElement("button")
+    btn.classList.add("btn-play")
+    btn.textContent = "Play again"
+    if(board.type == "player"){
+        info.textContent = "Game Over, You Won!"
+        info.appendChild(btn)
+    } else {
+        info.textContent =  `Game Over, Try Again!`
+        btn.textContent = "Play"
+        info.appendChild(btn)
+    }
+    btn.addEventListener("click", () => {
+        
     })
 }
 

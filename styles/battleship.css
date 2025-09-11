@@ -172,3 +172,37 @@ span.miss{
     cursor: not-allowed;
     opacity: 0.5;
 }
+
+.pc-board,
+.player-board{
+    position: relative;
+}
+.player-name-board{
+    position: absolute;
+    top: 0.2rem;
+}
+
+.announcement{
+    font-size: 1.2rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: navy;
+    color: white;
+    z-index: -2;
+    padding: 0.7rem;
+    border: 1px solid white;
+    border-radius: 1rem;
+    opacity: 0;
+}
+.btn-play{
+    background-color: green;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    color: white;
+    padding: 0.4rem 1rem;
+    border: 1px solid lightgreen;
+    cursor: pointer;
+    margin-left: 1rem;
+}
