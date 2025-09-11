@@ -1,7 +1,9 @@
-import { state, direction, loopClass, glowRedIfNoSpots, handlePickEvent} from "./gameplay.js";
+import { state, direction, loopClass, glowRedIfNoSpots, handlePickEvent, handleChangeEvent, player1, playerPc, carrier, battleship, cruiser, submarine, destroyer} from "./gameplay.js";
 import { findNeighbours, deleteShipFieldsFromNeighbours } from "./neighboursFields.js";
 import { findSpots } from "./findSpots.js";
-import { computerBoardGenerator } from "./computerBoardGenerator.js";
+import { computerBoardGenerator, carrierPc, battleshipPc, cruiserPc, submarinePc, destroyerPc } from "./computerBoardGenerator.js";
+import { showPcDivs, showPlayerDivs } from "./DOMboards.js";
+import { player } from "./player.js";
 const random = document.querySelector(".random");
 const info = document.querySelector(".announcement")
 
@@ -153,7 +155,7 @@ export function addListener(board, carrier, battleship, cruiser, submarine, dest
         const ships = document.querySelectorAll(".ship")
         state.canPlay = true;
         ships.forEach(ship => {
-            ship.classList.add("used")
+            ship.classList.add("used");
             ship.removeEventListener("click", handlePickEvent)
         })
     })
@@ -166,13 +168,14 @@ function showShipsOnPlayerBoard(array){
     })
 }
 
+// display info about end of the game also add event lister to play button which resets all game
 function displayInfo(board){
     info.style.zIndex = "5"
     info.style.opacity = "1"
     const btn = document.createElement("button")
     btn.classList.add("btn-play")
     btn.textContent = "Play again"
-    if(board.type == "player"){
+    if(board.type == "pc"){
         info.textContent = "Game Over, You Won!"
         info.appendChild(btn)
     } else {
@@ -181,8 +184,38 @@ function displayInfo(board){
         info.appendChild(btn)
     }
     btn.addEventListener("click", () => {
-        
+        resetGame()
+        console.log("oki")
+        info.style.opacity = "0";
+        setTimeout(() => {
+            info.style.zIndex = "-2"
+        }, 1000)
     })
 }
 
 
+function resetGame(){
+    const ships = document.querySelectorAll(".ship")
+    const carrier = document.querySelector(".carrier")
+    ships.forEach(ship => {
+        ship.classList.remove("picked", "used")
+        ship.addEventListener("click", handlePickEvent)
+    })
+    carrier.classList.add("picked")
+    playerPc.board.clearMatrix();
+    player1.board.clearMatrix();
+    resetShips();
+    computerBoardGenerator(playerPc.board, carrierPc, battleshipPc, cruiserPc, submarinePc, destroyerPc)
+    console.log(playerPc.board.matrix)
+    showPcDivs(playerPc.board.matrix)
+    showPlayerDivs(player1.board.matrix)
+}
+
+function resetShips(){
+    carrierPc.resetShip();
+    battleshipPc.resetShip();
+    cruiserPc.resetShip();
+    submarinePc.resetShip();
+    destroyerPc.resetShip();
+    
+}

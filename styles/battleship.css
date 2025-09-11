@@ -124,7 +124,7 @@ span.miss{
     color: black;
 }
 
-.picked{
+.picked .shipField{
     background-color: navy;
 }
 
@@ -168,9 +168,11 @@ span.miss{
 }
 
 .used{
-    background-color: navy;
     cursor: not-allowed;
     opacity: 0.5;
+}
+.used .shipField{
+    background-color: navy;
 }
 
 .pc-board,
@@ -192,9 +194,10 @@ span.miss{
     color: white;
     z-index: -2;
     padding: 0.7rem;
-    border: 1px solid white;
+    border: 3px solid red;
     border-radius: 1rem;
     opacity: 0;
+    transition: 1s linear all;
 }
 .btn-play{
     background-color: green;

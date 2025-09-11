@@ -4,7 +4,7 @@ import { findNeighbours } from "./neighboursFields.js";
 import { checkFields } from "./checkFields.js";
 import { dotAllNeighbours } from "./actions.js";
 export function gameBoard(type){
-    const matrix = Array.from({ length: 10}, () => Array(10).fill(0));
+    let matrix = Array.from({ length: 10}, () => Array(10).fill(0));
     // set gameboard with 0 ships placed
     let ships = 0;
     function placeShip([y,x], ship, direction){
@@ -53,7 +53,10 @@ export function gameBoard(type){
     function areAllSunk(){
         if(!ships) return true;
     }
-    return {matrix, placeShip, receiveAttack, areAllSunk, get ships(){return ships}, type};
+    function clearMatrix(){
+        this.matrix = Array.from({ length: 10}, () => Array(10).fill(0));
+    }
+    return {matrix, placeShip, receiveAttack, areAllSunk, get ships(){return ships}, type, clearMatrix};
 }
 
 // I am not using this function actually.

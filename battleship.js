@@ -15,5 +15,11 @@ export function factoryShip(length){
             return true;
         }
     }
-    return {length,hitted,get sunk() {return sunk}, hit, isSunk, launching, coords};
+    function resetShip(){
+        launching = false;
+        hitted = 0;
+        coords = [];
+        sunk = false;
+    }
+    return {length,hitted,get sunk() {return sunk}, hit, isSunk, launching, coords, resetShip};
 }

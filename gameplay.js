@@ -1,19 +1,19 @@
 import { factoryShip } from "./battleship.js";
 import { computerBoardGenerator, carrierPc , battleshipPc, cruiserPc, destroyerPc, submarinePc } from "./computerBoardGenerator.js";
 import { player } from "./player.js";
-import { showPcDivs, showPlayerDivs, carrierBox } from "./DOMboards.js";
+import { showPcDivs, showPlayerDivs} from "./DOMboards.js";
 import { updateBoards, switchTurn, computerMove, endGame, pickShip, glowTheField, clearGlow, addListener} from "./actions.js";
 import { findSpots } from "./findSpots.js";
 
 const change = document.querySelector(".change");
-const carrier = factoryShip(5)
-const battleship = factoryShip(4)
-const cruiser = factoryShip(3)
-const submarine = factoryShip(3)
-const destroyer = factoryShip(2)
-const player1 = player();
+export const carrier = factoryShip(5)
+export const battleship = factoryShip(4)
+export const cruiser = factoryShip(3)
+export const submarine = factoryShip(3)
+export const destroyer = factoryShip(2)
+export const player1 = player();
 player1.board.type = "player";
-const playerPc = player();
+export const playerPc = player();
 playerPc.board.type = "pc";
 playerPc.board.placeShip([0,0], destroyer, "horizontal")
 //computerBoardGenerator(playerPc.board, carrierPc, battleshipPc, cruiserPc, submarinePc, destroyerPc);
@@ -40,7 +40,6 @@ fields.forEach(field => {
         currentShipBox.removeEventListener("click", handlePickEvent)
         if(player1.board.ships === 5){
           state.canPlay = true;
-          change.removeEventListener("click", handleChangeEvent)
         }
       } // if the ship can't be placed make the fields red for 0.5sec
         else {
@@ -205,7 +204,7 @@ export function glowRedIfNoSpots(coords, ship, direction){
 
 addListener(player1.board, carrier, battleship, cruiser, submarine, destroyer)
 
-function handleChangeEvent(e){
+export function handleChangeEvent(e){
   const ships = document.querySelectorAll(".ship")
   if(direction === "horizontal"){
     direction = "vertical"
@@ -221,5 +220,5 @@ function handleChangeEvent(e){
 }
 change.addEventListener("click", handleChangeEvent)
 
-console.log(playerPc.board.matrix)
+
 

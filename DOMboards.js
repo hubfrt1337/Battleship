@@ -17,6 +17,7 @@ const field = document.querySelector(".field");
   }
 
  export function showPlayerDivs(board) {
+    playerBoard.innerHTML = ``;
     for (let i = 0; i < board.length ; i++) {
       for(let j = 0; j < board[i].length; j++){
             const boardDiv = createDiv("field");
@@ -26,6 +27,7 @@ const field = document.querySelector(".field");
     }
   }
   export function showPcDivs(board) {
+    pcBoard.innerHTML = ``;
     for (let i = 0; i < board.length ; i++) {
       for(let j = 0; j < board[i].length; j++){
             const boardDiv = createDiv("pc-field");
