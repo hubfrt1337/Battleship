@@ -31,9 +31,12 @@ header{
     gap: 0.5rem;
     justify-content: space-evenly;
 }
+
 .ship{
     display: flex;
     cursor: pointer;
+    justify-content: center;
+    
 }
 .shipField{
     display: flex;
@@ -43,9 +46,20 @@ header{
     border-left: none;
 
 }
-.shipField:first-child{
-    border-left: 2px solid blue;
+.shipField:nth-of-type(1){
+    border-left: 2px solid blue; 
 }
+.ship-vertical{
+    flex-direction: column;
+}
+.ship-vertical .shipField{
+    border: 2px solid blue;
+    border-top: none;
+}
+.ship-vertical .shipField:first-child{
+    border-top: 2px solid blue;
+}
+
 
 .sea{
     width: 80vw;

@@ -5,7 +5,7 @@ import { showPcDivs, showPlayerDivs, carrierBox } from "./DOMboards.js";
 import { updateBoards, switchTurn, computerMove, endGame, pickShip, glowTheField, clearGlow, addListener} from "./actions.js";
 import { findSpots } from "./findSpots.js";
 
-
+const change = document.querySelector(".change");
 const carrier = factoryShip(5)
 const battleship = factoryShip(4)
 const cruiser = factoryShip(3)
@@ -21,7 +21,7 @@ showPcDivs(playerPc.board.matrix);
 
 
  let currentShip = carrier;
- let direction = "horizontal";
+export let direction = "horizontal";
 const fields = document.querySelectorAll(".field");
 const pcFields = document.querySelectorAll(".pc-field");
 // click event on player board
@@ -39,6 +39,7 @@ fields.forEach(field => {
         currentShipBox.removeEventListener("click", handlePickEvent)
         if(player1.board.ships === 5){
           state.canPlay = true;
+          change.removeEventListener("click", handleChangeEvent)
         }
       } // if the ship can't be placed make the fields red for 0.5sec
         else {
@@ -203,3 +204,19 @@ export function glowRedIfNoSpots(coords, ship, direction){
 }
 
 addListener(player1.board, carrier, battleship, cruiser, submarine, destroyer)
+
+function handleChangeEvent(e){
+  const ships = document.querySelectorAll(".ship")
+  if(direction === "horizontal"){
+    direction = "vertical"
+    ships.forEach(ship => {
+      ship.classList.add("ship-vertical")
+    })
+  } else {
+    direction = "horizontal";
+    ships.forEach(ship => {
+      ship.classList.remove("ship-vertical")
+    })
+  }
+}
+change.addEventListener("click", handleChangeEvent)

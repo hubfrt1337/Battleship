@@ -1,9 +1,9 @@
-import { state, loopClass, glowRedIfNoSpots, handlePickEvent} from "./gameplay.js";
+import { state, direction, loopClass, glowRedIfNoSpots, handlePickEvent} from "./gameplay.js";
 import { findNeighbours, deleteShipFieldsFromNeighbours } from "./neighboursFields.js";
 import { findSpots } from "./findSpots.js";
 import { computerBoardGenerator } from "./computerBoardGenerator.js";
 const random = document.querySelector(".random");
-const change = document.querySelector(".change");
+
 
 // It updates the board based on the coordinates given and returns if it was a hit or a miss;
 export function updateBoards(matrix, coords){
@@ -165,6 +165,5 @@ function showShipsOnPlayerBoard(array){
         field.classList.add("shipPlaced")
     })
 }
-export function clearPickedShip(){
-    
-}
+
+
