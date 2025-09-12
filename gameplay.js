@@ -26,50 +26,47 @@ export let direction = "horizontal";
 const fields = document.querySelectorAll(".field");
 const pcFields = document.querySelectorAll(".pc-field");
 // click event on player board
-fields.forEach(field => {
-  field.addEventListener("click", (e) => { 
-    const coords = JSON.parse(e.target.dataset.value);
-    // if ship is not launched check if it is possible to place it on specific coordinates and place it
-    if(currentShip.launching === false) {
-      if(player1.board.placeShip(coords, currentShip, direction)){
-        const spots = findSpots(coords, currentShip, direction);
-        loopClass(coords, spots, "add")
-        const currentShipBox = document.querySelector(".ship.picked");
-        currentShipBox.classList.remove("picked")
-        currentShipBox.classList.add("used")
-        currentShipBox.removeEventListener("click", handlePickEvent)
-        if(player1.board.ships === 5){
-          state.canPlay = true;
-        }
-      } // if the ship can't be placed make the fields red for 0.5sec
-        else {
-        const spots = findSpots(coords, currentShip, direction);
-        // if ship is not out of board use this
-        if(spots){
-          loopClass(coords, spots, "red")
-          setTimeout(() => {
-            loopClass(coords, spots, "clear")
-          }, 500);
-        } // if the ship will be out ouf board use special method to display fields red color 
-        else {
-          const array = glowRedIfNoSpots(coords, currentShip, direction)
-          loopClass(coords, array, "red")
+export function startPlayerEvents(fields){
+  console.log("odpala się")
+  console.log(fields)
+  fields.forEach(field => {
+    field.addEventListener("click", (e) => { 
+      const coords = JSON.parse(e.target.dataset.value);
+      console.log(currentShip.launching)
+      // if ship is not launched check if it is possible to place it on specific coordinates and place it
+      if(currentShip.launching === false) {
+        if(player1.board.placeShip(coords, currentShip, direction)){
+          const spots = findSpots(coords, currentShip, direction);
+          loopClass(coords, spots, "add")
+          const currentShipBox = document.querySelector(".ship.picked");
+          currentShipBox.classList.remove("picked")
+          currentShipBox.classList.add("used")
+          currentShipBox.removeEventListener("click", handlePickEvent)
+          if(player1.board.ships === 5){
+            state.canPlay = true;
+          }
+        } // if the ship can't be placed make the fields red for 0.5sec
+          else {
+          const spots = findSpots(coords, currentShip, direction);
+          // if ship is not out of board use this
+          if(spots){
+            loopClass(coords, spots, "red")
             setTimeout(() => {
-            loopClass(coords, array, "clear")
-          }, 500);
+              loopClass(coords, spots, "clear")
+            }, 500);
+          } // if the ship will be out ouf board use special method to display fields red color 
+          else {
+            const array = glowRedIfNoSpots(coords, currentShip, direction)
+            loopClass(coords, array, "red")
+              setTimeout(() => {
+              loopClass(coords, array, "clear")
+            }, 500);
+          }
         }
       }
-    }
-    // jesli statek bedzie postawiony po prostu musze wyłaczyc go to na dole niepotrzebne bedzie
-    /* else {
-        const spots = findSpots(coords, currentShip, direction);
-        loopClass(coords, spots, "red")
-        setTimeout(() => {
-          loopClass(coords, spots, "clear")
-        }, 500);
-    } */
-  })
-})  
+    })
+  })  
+}
 
 
 const playerBoard = document.querySelector(".js-player-board");
@@ -97,7 +94,9 @@ pcFields.forEach(field => {
   field.addEventListener("click", (e) => { 
     // if false user can't click because it is pc turn
     if(!state.canClick) return;
+    console.log("klikam")
     if(!state.canPlay) return;
+    console.log("klikam 2")
     // get coordinates from data-value attribute convert to array from string
     const coords = JSON.parse(e.target.dataset.value);
     // if attack was on the same field return whole function and do nothing
@@ -219,6 +218,6 @@ export function handleChangeEvent(e){
   }
 }
 change.addEventListener("click", handleChangeEvent)
-
+startPlayerEvents(fields)
 
 

@@ -1,4 +1,4 @@
-import { state, direction, loopClass, glowRedIfNoSpots, handlePickEvent, handleChangeEvent, player1, playerPc, carrier, battleship, cruiser, submarine, destroyer} from "./gameplay.js";
+import { state, direction, loopClass, glowRedIfNoSpots, handlePickEvent, handleChangeEvent, player1, playerPc, carrier, battleship, cruiser, submarine, destroyer, startPlayerEvents} from "./gameplay.js";
 import { findNeighbours, deleteShipFieldsFromNeighbours } from "./neighboursFields.js";
 import { findSpots } from "./findSpots.js";
 import { computerBoardGenerator, carrierPc, battleshipPc, cruiserPc, submarinePc, destroyerPc } from "./computerBoardGenerator.js";
@@ -211,6 +211,9 @@ function resetGame(){
     console.log(playerPc.board.matrix)
     showPcDivs(playerPc.board.matrix)
     showPlayerDivs(player1.board.matrix)
+    state.canClick = true;
+    const fields = document.querySelectorAll(".field")
+    startPlayerEvents(fields);
 }
 
 function resetShips(){
@@ -219,5 +222,10 @@ function resetShips(){
     cruiserPc.resetShip();
     submarinePc.resetShip();
     destroyerPc.resetShip();
-    console.log(carrierPc)
+    
+    carrier.resetShip();
+    battleship.resetShip();
+    cruiser.resetShip();
+    submarine.resetShip();
+    destroyer.resetShip();
 }
