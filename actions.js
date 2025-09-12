@@ -1,4 +1,4 @@
-import { state, direction, loopClass, glowRedIfNoSpots, handlePickEvent, handleChangeEvent, player1, playerPc, carrier, battleship, cruiser, submarine, destroyer, startPlayerEvents} from "./gameplay.js";
+import { state, direction, loopClass, glowRedIfNoSpots, handlePickEvent, handleChangeEvent, player1, playerPc, carrier, battleship, cruiser, submarine, destroyer, startPlayerEvents, startPcEvents} from "./gameplay.js";
 import { findNeighbours, deleteShipFieldsFromNeighbours } from "./neighboursFields.js";
 import { findSpots } from "./findSpots.js";
 import { computerBoardGenerator, carrierPc, battleshipPc, cruiserPc, submarinePc, destroyerPc } from "./computerBoardGenerator.js";
@@ -34,6 +34,8 @@ export function switchTurn(currentTurn, result){
 // It makes a random move for the computer and updates the board accordingly
 export function computerMove(board){
     const coords = getRandomMove();
+    console.log(coords)
+    console.log(board)
     board.receiveAttack(coords);
     // result is x or · depends by if it was hitted or missed
     const result = updateBoards(board.matrix, coords);
@@ -213,7 +215,10 @@ function resetGame(){
     showPlayerDivs(player1.board.matrix)
     state.canClick = true;
     const fields = document.querySelectorAll(".field")
+    const pcFields = document.querySelectorAll(".pc-field")
+    pushMoves();
     startPlayerEvents(fields);
+    startPcEvents(pcFields)
 }
 
 function resetShips(){

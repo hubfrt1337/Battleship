@@ -32,7 +32,6 @@ export function startPlayerEvents(fields){
   fields.forEach(field => {
     field.addEventListener("click", (e) => { 
       const coords = JSON.parse(e.target.dataset.value);
-      console.log(currentShip.launching)
       // if ship is not launched check if it is possible to place it on specific coordinates and place it
       if(currentShip.launching === false) {
         if(player1.board.placeShip(coords, currentShip, direction)){
@@ -90,49 +89,51 @@ export const state = {
   canClick: true,
   canPlay: false,
 };
-pcFields.forEach(field => {
-  field.addEventListener("click", (e) => { 
-    // if false user can't click because it is pc turn
-    if(!state.canClick) return;
-    console.log("klikam")
-    if(!state.canPlay) return;
-    console.log("klikam 2")
-    // get coordinates from data-value attribute convert to array from string
-    const coords = JSON.parse(e.target.dataset.value);
-    // if attack was on the same field return whole function and do nothing
-    if(!playerPc.board.receiveAttack(coords)){
-        return;
-    } 
-    
-    const result = updateBoards(playerPc.board.matrix, coords);
-    // result is either "x" or "·"
-    const span = document.createElement("span");
-    span.className = result === "x" ? "hit" : "miss";
-    span.innerText = result;
-    e.target.appendChild(span);
-    // display result on the field
-    //
-    
-    // check if game is over after player move
-    endGame(playerPc.board) 
-    
+export function startPcEvents(pcFields){
+  pcFields.forEach(field => {
+    field.addEventListener("click", (e) => { 
+      // if false user can't click because it is pc turn
+      if(!state.canClick) return;
+      console.log("klikam")
+      if(!state.canPlay) return;
+      console.log("klikam 2")
+      // get coordinates from data-value attribute convert to array from string
+      const coords = JSON.parse(e.target.dataset.value);
+      // if attack was on the same field return whole function and do nothing
+      if(!playerPc.board.receiveAttack(coords)){
+          return;
+      } 
+      
+      const result = updateBoards(playerPc.board.matrix, coords);
+      // result is either "x" or "·"
+      const span = document.createElement("span");
+      span.className = result === "x" ? "hit" : "miss";
+      span.innerText = result;
+      e.target.appendChild(span);
+      // display result on the field
+      //
+      
+      // check if game is over after player move
+      endGame(playerPc.board) 
+      
 
-    // if game is not over switch turn based on result
-    // if result is x keep the turn to the player
-    if(switchTurn("playerTurn", result) === "playerTurn"){
-      return;
-    }
-    // pc turns on the bottom
-    // pc turns on the bottom
-    // if result is · switch to pc turn and make a move after 1 second
-    if(switchTurn("playerTurn", result) === "pcTurn"){
-      state.canClick = false;
-      setTimeout(() => {
-        computerMove(player1.board);
-      },1000);
-    };
+      // if game is not over switch turn based on result
+      // if result is x keep the turn to the player
+      if(switchTurn("playerTurn", result) === "playerTurn"){
+        return;
+      }
+      // pc turns on the bottom
+      // pc turns on the bottom
+      // if result is · switch to pc turn and make a move after 1 second
+      if(switchTurn("playerTurn", result) === "pcTurn"){
+        state.canClick = false;
+        setTimeout(() => {
+          computerMove(player1.board);
+        },1000);
+      };
+    });
   });
-});
+}
 export function handlePickEvent(e){
   const ship = e.currentTarget;
   pickShip(ship)
@@ -219,5 +220,6 @@ export function handleChangeEvent(e){
 }
 change.addEventListener("click", handleChangeEvent)
 startPlayerEvents(fields)
+startPcEvents(pcFields)
 
 
