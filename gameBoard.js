@@ -57,7 +57,7 @@ export function gameBoard(type){
     function clearMatrix(){
         matrix = Array.from({ length: 10}, () => Array(10).fill(0));
     }
-    return {set matrix(val) {matrix = val}, get matrix(){return matrix}, placeShip, receiveAttack, areAllSunk, get ships(){return ships}, type, clearMatrix};
+    return {set matrix(val) {matrix = val}, get matrix(){return matrix}, placeShip, receiveAttack, areAllSunk, get ships(){return ships}, type, clearMatrix, set ships(val){return ships = val}};
 }
 
 // I am not using this function actually.

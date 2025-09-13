@@ -88,6 +88,8 @@ export function endGame(board){
         displayInfo(board)
         state.canClick = false;
         computerArrayOfMoves = [];
+        state.canPlay = false;
+        player1.board.ships = 0;
         return true;
     }
     return false;

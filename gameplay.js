@@ -15,8 +15,7 @@ export const player1 = player();
 player1.board.type = "player";
 export const playerPc = player();
 playerPc.board.type = "pc";
-playerPc.board.placeShip([0,0], destroyer, "horizontal")
-//computerBoardGenerator(playerPc.board, carrierPc, battleshipPc, cruiserPc, submarinePc, destroyerPc);
+computerBoardGenerator(playerPc.board, carrierPc, battleshipPc, cruiserPc, submarinePc, destroyerPc);
 showPlayerDivs(player1.board.matrix);
 showPcDivs(playerPc.board.matrix);
 
@@ -27,8 +26,6 @@ const fields = document.querySelectorAll(".field");
 const pcFields = document.querySelectorAll(".pc-field");
 // click event on player board
 export function startPlayerEvents(fields){
-  console.log("odpala się")
-  console.log(fields)
   fields.forEach(field => {
     field.addEventListener("click", (e) => { 
       const coords = JSON.parse(e.target.dataset.value);

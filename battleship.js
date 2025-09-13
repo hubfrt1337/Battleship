@@ -21,6 +21,15 @@ export function factoryShip(length){
         coords = [];
         sunk = false;
     }
-    return {length,hitted,get sunk() {return sunk}, hit, isSunk, get launching() {return launching},
-    set launching(val) {launching = val}, coords, resetShip};
+    return {length,
+        get hitted() {return hitted},
+        set hitted (val) {return hitted = val},
+        get sunk() {return sunk},
+        hit, 
+        isSunk, 
+        get launching() {return launching},
+        set launching(val) {launching = val},
+        get coords(){return coords},
+        set coords(val){return coords = val},
+         resetShip};
 }
