@@ -16,7 +16,8 @@ main{
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    width: 80vw;
+    margin: 0 auto;
 }
 header{
     align-items: center;
@@ -38,12 +39,13 @@ header{
 .ships{
     display: flex;
     flex-wrap: wrap;
-    width: 80vw;
     gap: 0.5rem;
     justify-content: space-evenly;
     flex-direction: row;
     height: 130px;
     align-items: center;
+    width: 100%;
+    position: relative;
 }
 
 .ship{
@@ -76,7 +78,6 @@ header{
 
 
 .sea{
-    width: 80vw;
     max-width: 700px;
     background-image: linear-gradient(rgba(100,100,100,0.4), rgba(150,150,150,0.4)),url(../images/sea.jpg);
     border: black solid 5px;
@@ -84,6 +85,7 @@ header{
     background-size: cover;
     display: grid;
     grid-template-columns: 1fr;
+    width: 100%;
 }
 .player-board,
 .pc-board{
@@ -150,14 +152,17 @@ span.miss{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 80vw;
     max-width: 1000px;
+    width: 100%;
+    margin-top: 0.5rem;
+    color: white;
 }
 .flex-options{
     display: flex;
     justify-content: end;
     gap: 1rem;
     align-items: center;
+    width: 100%;
 }
 .random{
     padding: 0.5rem;
@@ -228,12 +233,24 @@ span.miss{
     margin-left: 1rem;
 }
 
+@media screen and (min-width: 500px){
+    main{
+        width: 80vw;
+    }
+    .sea{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 @media screen and (min-width: 800px){
     .sea{
         grid-template-columns: 1fr 1fr;
     }
     .ships{
         align-items: center;
+    }
+    main{
+        width: 70vw;
     }
 }
 
@@ -251,4 +268,24 @@ span.miss{
         top: 0;
     }
     
+}
+
+@media screen and (max-width: 500px){
+    .flex-options{
+        top: -2rem;
+    }
+    #header-text{
+        font-size: 2rem;
+    }
+    .ship-icon{
+        height: 35px;
+        width: 35px;
+    }
+    .random{
+        font-size: 0.8rem;
+    }
+    .change{
+        width: 45px;
+        height: 35px;
+    }
 }
