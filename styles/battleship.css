@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Asimovian", sans-serif;
 }
 html{
     height: 100%;
@@ -16,13 +17,23 @@ main{
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
 }
 header{
     align-items: center;
     font-size: 3rem;
     word-spacing: 3px;
+    font-weight: 700;
+    display: flex;
+    gap: 1rem;
+}
+#header-text{
+    font-family: "Caveat", cursive;
+}
+.ship-icon{
+    height: 60px;
+    width: 60px;
+    filter: invert()
+
 }
 .ships{
     display: flex;
@@ -30,6 +41,9 @@ header{
     width: 80vw;
     gap: 0.5rem;
     justify-content: space-evenly;
+    flex-direction: row;
+    height: 130px;
+    align-items: center;
 }
 
 .ship{
@@ -63,6 +77,7 @@ header{
 
 .sea{
     width: 80vw;
+    max-width: 700px;
     background-image: linear-gradient(rgba(100,100,100,0.4), rgba(150,150,150,0.4)),url(../images/sea.jpg);
     border: black solid 5px;
     background-repeat: no-repeat;
@@ -131,12 +146,18 @@ span.miss{
 .shipPlaced{
     background-color: navy;
 }
-
+.header-flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80vw;
+    max-width: 1000px;
+}
 .flex-options{
     display: flex;
     justify-content: end;
-    width: 80vw;
     gap: 1rem;
+    align-items: center;
 }
 .random{
     padding: 0.5rem;
@@ -175,10 +196,7 @@ span.miss{
     background-color: navy;
 }
 
-.pc-board,
-.player-board{
-    position: relative;
-}
+
 .player-name-board{
     position: absolute;
     top: 0.2rem;
@@ -208,4 +226,29 @@ span.miss{
     border: 1px solid lightgreen;
     cursor: pointer;
     margin-left: 1rem;
+}
+
+@media screen and (min-width: 800px){
+    .sea{
+        grid-template-columns: 1fr 1fr;
+    }
+    .ships{
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 1050px){
+    .pc-board,
+    .player-board{
+        padding: 3rem;
+    }
+    .pc-board::before,
+    .player-board::before{
+        inset: 3rem;
+    }
+    .player-name-board{
+        font-size: 2rem;
+        top: 0;
+    }
+    
 }

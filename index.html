@@ -5,18 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./styles/battleship.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Asimovian&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="announcement"></div>
     <main>
-        <header>Battleship</header>
-        <div class="ships">
+        <div class="header-flex">
+            <header>
+                <div id="header-text">Battleship</div>
+                <img class="ship-icon" src="./images/ship.png">
+            </header>
             <div class="flex-options">
-            <button class="random">Random</button>
-            <button class="change">
-                <img id="img" src="./images/exchange.png" alt="exchange">
-            </button>
+                <button class="random">Random</button>
+                <button class="change">
+                    <img id="img" src="./images/exchange.png" alt="exchange">
+                </button>
+            </div>
         </div>
+        <div class="ships">
             <div class="carrier ship picked" data-name="carrier">
                 <div class="shipField"></div>
                 <div class="shipField"></div>
