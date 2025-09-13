@@ -13,6 +13,10 @@ const pcBoard = document.querySelector(".js-pc-board");
 
  export function showPlayerDivs(board) {
     playerBoard.innerHTML = ``;
+    const boardName = document.createElement("div");
+    boardName.className = "player-name-board";
+    boardName.textContent = "My Board";
+    playerBoard.appendChild(boardName)
     for (let i = 0; i < board.length ; i++) {
       for(let j = 0; j < board[i].length; j++){
             const boardDiv = createDiv("field");
@@ -23,6 +27,10 @@ const pcBoard = document.querySelector(".js-pc-board");
   }
   export function showPcDivs(board) {
     pcBoard.innerHTML = ``;
+    const boardName = document.createElement("div");
+    boardName.className = "player-name-board";
+    boardName.textContent = "Computer Board";
+    pcBoard.appendChild(boardName)
     for (let i = 0; i < board.length ; i++) {
       for(let j = 0; j < board[i].length; j++){
             const boardDiv = createDiv("pc-field");
