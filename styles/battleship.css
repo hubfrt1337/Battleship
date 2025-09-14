@@ -42,7 +42,7 @@ header{
     gap: 0.5rem;
     justify-content: space-evenly;
     flex-direction: row;
-    height: 130px;
+    height: 150px;
     align-items: center;
     width: 100%;
     position: relative;
@@ -233,12 +233,20 @@ span.miss{
     margin-left: 1rem;
 }
 
-@media screen and (min-width: 500px){
+@media screen and (min-width: 450px){
     main{
         width: 80vw;
     }
     .sea{
         grid-template-columns: 1fr 1fr;
+    }
+    .ships{
+        height: 120px;
+    }
+}
+@media screen and (min-width: 600px){
+    .ships{
+        height: 150px;
     }
 }
 
@@ -267,10 +275,16 @@ span.miss{
         font-size: 2rem;
         top: 0;
     }
+    .header-flex{
+        max-width: 1200px;
+    }
+    .flex-options{
+        max-width: 1200px;
+    }
     
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 451px){
     .flex-options{
         top: -2rem;
     }
@@ -288,4 +302,19 @@ span.miss{
         width: 45px;
         height: 35px;
     }
+}
+
+.reject{
+    font-size: 1.2rem;
+    position: absolute;
+    width: 80%;
+    z-index: 10;
+    color: red;
+    font-size: bold;
+    background-color: navy;
+    padding: 0.7rem;
+    text-align: center;
+    border: 3px solid red;
+    border-radius: 1rem;
+    transition: 1s linear all;
 }

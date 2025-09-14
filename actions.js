@@ -236,3 +236,19 @@ function resetShips(){
     submarine.resetShip();
     destroyer.resetShip();
 }
+
+
+const pcBoard = document.querySelector(".js-pc-board");
+pcBoard.addEventListener("click", () => {
+    if(!state.canPlay){
+        const reject = document.createElement("div")
+        reject.className = "reject"
+        reject.textContent = "Place Your Ships"
+        pcBoard.appendChild(reject)
+        setTimeout(() => {
+            reject.style.opacity = "0";
+            reject.style.zIndex = "-5";
+        },1000)
+    }
+})
+console.log("masło")
