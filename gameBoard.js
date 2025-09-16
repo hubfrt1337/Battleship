@@ -16,7 +16,6 @@ export function gameBoard(type){
         const result = checkFields(neighbours,matrix);
         // if result is true change matrix values to [1, ship] where 1 means occupied by a ship and ship is the ship object
         if(result){
-            console.log(matrix)
             spots.forEach(([y,x]) => {
                 matrix[y][x] = [1, ship]
                 // if ship is placed set lanuching to true
@@ -43,7 +42,6 @@ export function gameBoard(type){
         if(coords[0] === 1){
             matrix[y][x][1].hit();
             matrix[y][x][1].coords.push([y,x]);
-            console.log(matrix[y][x][1])
             if(matrix[y][x][1].isSunk()){
                 ships--;
                 dotAllNeighbours(matrix[y][x][1].coords, this.type, this);

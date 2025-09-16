@@ -34,8 +34,6 @@ export function switchTurn(currentTurn, result){
 // It makes a random move for the computer and updates the board accordingly
 export function computerMove(board){
     const coords = getRandomMove();
-    console.log(coords)
-    console.log(board)
     board.receiveAttack(coords);
     // result is x or · depends by if it was hitted or missed
     const result = updateBoards(board.matrix, coords);
@@ -103,7 +101,6 @@ export function dotAllNeighbours(array, type, context){
         type = "field"
     }
     const shipAndNeighbours = findNeighbours(array);
-    console.log(shipAndNeighbours, "shipAndNeighbours");
     const neighboursOnly = deleteShipFieldsFromNeighbours(array, shipAndNeighbours);
     neighboursOnly.forEach( el => {
         context.receiveAttack(el)
@@ -189,7 +186,6 @@ function displayInfo(board){
     }
     btn.addEventListener("click", () => {
         resetGame()
-        console.log("oki")
         info.style.opacity = "0";
         setTimeout(() => {
             info.style.zIndex = "-2"
@@ -211,8 +207,6 @@ function resetGame(){
     resetShips();
     const arr = computerBoardGenerator(playerPc.board, carrierPc, 
     battleshipPc, cruiserPc, submarinePc, destroyerPc)
-    console.log(arr)
-    console.log(playerPc.board.matrix)
     showPcDivs(playerPc.board.matrix)
     showPlayerDivs(player1.board.matrix)
     state.canClick = true;
@@ -251,4 +245,3 @@ pcBoard.addEventListener("click", () => {
         },1000)
     }
 })
-console.log("masło")

@@ -6,9 +6,7 @@ export const submarinePc = factoryShip(3)
 export const destroyerPc = factoryShip(2);
 export function computerBoardGenerator(board, carrierEl, battleshipEl, cruiserEl, submarineEl, destroyerEl){
     let arrayOfShips = []
-    console.log(carrierEl.launching)
     if(!carrierEl.launching){
-        console.log("works")
         let placed = false;
         while(!placed){
             // if board functions end succesfully it return array of ship coords; It is equal to true so it stops while loop

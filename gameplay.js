@@ -91,9 +91,7 @@ export function startPcEvents(pcFields){
     field.addEventListener("click", (e) => { 
       // if false user can't click because it is pc turn
       if(!state.canClick) return;
-      console.log("klikam")
       if(!state.canPlay) return;
-      console.log("klikam 2")
       // get coordinates from data-value attribute convert to array from string
       const coords = JSON.parse(e.target.dataset.value);
       // if attack was on the same field return whole function and do nothing
